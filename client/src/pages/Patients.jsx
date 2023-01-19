@@ -11,6 +11,16 @@ import {
 } from "@mui/material";
 
 const Patients = () => {
+  const getRecentPatients = async () => {
+    console.log("okkkk");
+    const patientdata = await axiosinstance.post("/hospital/getrecentpatient", {
+      hm_hid: "12345",
+    });
+    await setData(patientdata.data.data);
+  };
+  const [data, setData] = React.useState([{}]);
+  getRecentPatients();
+  console.log(data);
   const columns = [
     {
       id: "sn",
@@ -50,49 +60,49 @@ const Patients = () => {
     },
   ];
 
-  const data = [
-    {
-      id: 1,
-      profile_pic: "/user.jpg",
-      name: "John Doe",
-      address: "Kathmandu",
-      contact: "984567890",
-      gender: "Male",
-      blood_group: "A+",
-    },
-    {
-      id: 1,
-      profile_pic: "/user.jpg",
-      name: "John Doe",
-      address: "Kathmandu",
-      contact: "984567890",
-      gender: "Male",
-      blood_group: "A+",
-    },
-    {
-      id: 1,
-      profile_pic: "/user.jpg",
-      name: "John Doe",
-      address: "Kathmandu",
-      contact: "984567890",
-      gender: "Male",
-      blood_group: "A+",
-    },
-    {
-      id: 1,
-      profile_pic: "/user.jpg",
-      name: "John Doe",
-      address: "Kathmandu",
-      contact: "984567890",
-      gender: "Male",
-      blood_group: "A+",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     profile_pic: "/user.jpg",
+  //     name: "John Doe",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     gender: "Male",
+  //     blood_group: "A+",
+  //   },
+  //   {
+  //     id: 1,
+  //     profile_pic: "/user.jpg",
+  //     name: "John Doe",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     gender: "Male",
+  //     blood_group: "A+",
+  //   },
+  //   {
+  //     id: 1,
+  //     profile_pic: "/user.jpg",
+  //     name: "John Doe",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     gender: "Male",
+  //     blood_group: "A+",
+  //   },
+  //   {
+  //     id: 1,
+  //     profile_pic: "/user.jpg",
+  //     name: "John Doe",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     gender: "Male",
+  //     blood_group: "A+",
+  //   },
+  // ];
   return (
     <>
       <div className={styles.patients_con}>
         <div className={styles.patients_top}>
-          <p className={styles.title}>Patients</p>
+          <p className={styles.title}> Recent Patients</p>
           <div className={styles.search_con}>
             <input type="text" className={styles.search} placeholder="Search" />
             <div className={styles.icon_con}>
@@ -124,7 +134,10 @@ const Patients = () => {
                 {data.map((row, i) => {
                   return (
                     <TableRow hover tabIndex={-1} key={i}>
-                      <TableCell key={row.id} style={{ fontFamily: "Poppins" }}>
+                      <TableCell
+                        key={row?.p__id}
+                        style={{ fontFamily: "Poppins" }}
+                      >
                         {i + 1}
                       </TableCell>
 
@@ -133,18 +146,18 @@ const Patients = () => {
                         style={{ fontFamily: "Poppins" }}
                       >
                         <div className={styles.patient_pic}>
-                          <img src={row.profile_pic} className={styles.img} />
+                          <img src={row.p_profile} className={styles.img} />
                         </div>
                       </TableCell>
 
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.name}
+                        {row?.p_name}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.address}
+                        {row?.p_address}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.contact}
+                        {row?.p_contact}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
                         <span className={styles.gender}>{row.gender}</span>
@@ -153,7 +166,7 @@ const Patients = () => {
                         style={{ fontFamily: "Poppins" }}
                         align="center"
                       >
-                        {row.blood_group}
+                        {row.p_bg}
                       </TableCell>
                     </TableRow>
                   );
