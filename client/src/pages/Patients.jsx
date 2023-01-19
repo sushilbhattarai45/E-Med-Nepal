@@ -7,11 +7,8 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
-  Typography,
 } from "@mui/material";
-import { MdDelete } from "react-icons/md";
 
 const Patients = () => {
   const columns = [
