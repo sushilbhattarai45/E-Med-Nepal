@@ -1,14 +1,17 @@
-import React from 'react'
-import {Outlet} from "react-router-dom"
-import Navbar from '../components/Navbar'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
+import "../css/global.css";
 
 const Nav = () => {
   return (
     <>
-    <Navbar/>
-    <Outlet/>
+      <Sidebar />
+      <div className="layout_container">
+        <Outlet />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

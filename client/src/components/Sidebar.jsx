@@ -1,0 +1,66 @@
+import React from "react";
+import styles from "../css/components/Sidebar.module.css";
+import { FaHospitalAlt, FaUser } from "react-icons/fa";
+import { BsClipboardPlus } from "react-icons/bs";
+import { FiLogOut } from "react-icons/fi";
+import { CiUser } from "react-icons/ci";
+import { NavLink,useLocation } from "react-router-dom";
+
+const Sidebar = () => {
+    const location = useLocation();
+    const { pathname } = location;
+  return (
+    <>
+      <div className={styles.sidebar_con}>
+        <div className={styles.sidebar_top}>
+          <FaHospitalAlt />
+        </div>
+        <div className={styles.sidebar_mid}>
+          <NavLink
+            className={pathname === "/app" ? styles.active : styles.link_con}
+            to="/app"
+          >
+            <div className={styles.link}>
+              <BsClipboardPlus />
+            </div>
+          </NavLink>
+          <NavLink
+            className={
+              pathname === "/app/reports" ? styles.active : styles.link_con
+            }
+            to="/app/reports"
+          >
+            <div className={styles.link}>
+              <BsClipboardPlus />
+            </div>
+          </NavLink>
+          <NavLink
+            className={
+              pathname === "/app/patients" ? styles.active : styles.link_con
+            }
+            to="/app/patients"
+          >
+            <div className={styles.link}>
+              <CiUser size={28} />
+            </div>
+          </NavLink>
+        </div>
+        <div className={styles.sidebar_bottom}>
+          <div className={styles.profile_con}>
+            <div className={styles.pic_icon}>
+              <FaUser />
+            </div>
+            {/* <img src="" className={styles.pic}/> */}
+          </div>
+          <div className={styles.logout_con}>
+            <div className={styles.logout}>
+              <FiLogOut />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Sidebar;
