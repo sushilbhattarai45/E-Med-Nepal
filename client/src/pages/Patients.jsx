@@ -1,8 +1,13 @@
 import React from 'react'
+import {styles} from "../css/pages/Patients.module.css"
 
 const Patients = () => {
   return (
-    <div>Patients</div>
+    <>
+    <div className={styles.patients_con}>
+
+    </div>
+    </>
   )
 }
 

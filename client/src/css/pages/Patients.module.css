@@ -1,0 +1,7 @@
+.patients_con {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 8px;
+  gap: 1rem;
+}
+
