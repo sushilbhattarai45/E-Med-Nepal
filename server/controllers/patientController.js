@@ -35,7 +35,7 @@ export const postPatient = async (req, res) => {
     console.log("ok" + patient);
     const exists = await patientSchema.findOne({ p_mid: p_mid });
 
-    if (!exists || exists?.length == 0) {
+    if (!exists || exists.length == 0) {
       const data = await patient.save();
       return res.json({ message: "Done", statuscode: 200, data: data });
     } else {
