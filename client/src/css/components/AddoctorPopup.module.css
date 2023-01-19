@@ -1,0 +1,27 @@
+.add_con{
+    padding:20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.img_con{
+    width: 200px;
+    height:200px;
+    border-radius:8px;
+    overflow: hidden;
+    position: relative;
+}
+.img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.img_con span{
+    position: absolute;
+    top: 5px;
+    right:5px;
+    color: var(--white);
+    opacity: 0.8;
+    cursor: pointer;
+    font-size: 1.4rem;
+}
