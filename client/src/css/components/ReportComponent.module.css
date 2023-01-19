@@ -6,7 +6,7 @@
 }
 .container {
   padding: 24px;
-  min-width: 400px;
+  width: min(450px, 50vw);
   /* border-radius: 24px; */
   cursor: pointer;
 }
@@ -20,6 +20,7 @@ h2 {
 .row {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .main_content {
   width: fit-content;
@@ -67,22 +68,23 @@ h2 {
   padding: 4px 16px;
   border: 2px solid #7c7c7c;
   border-radius: 24px;
-}
-.symptoms {
-  display: flex;
-  gap: 8px;
-  /* justify-content: space-between; */
-}
-.symptoms_text {
-  margin-top: 24px;
-  margin-bottom: 8px;
+  margin-top: 8px;
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 24px;
+  /* identical to box height */
   color: #7c7c7c;
 }
+.symptoms {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+
 .severity_indicator {
   height: 1rem;
   background-color: red;
