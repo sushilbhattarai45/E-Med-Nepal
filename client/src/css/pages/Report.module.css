@@ -1,8 +1,8 @@
 .reports_con {
   display: flex;
-  flex-direction: column;
-  padding: 2px 8px;
-  gap: 1rem;
+  flex-direction: row;
+  /* padding: 2px 8px; */
+  /* gap: 1rem; */
 }
 .report_header {
   display: flex;
@@ -24,14 +24,15 @@
 }
 .body_top {
   display: flex;
-  gap: 1rem;
+  flex: 1.5;
+  /* gap: 1rem; */
 }
 .report_info {
   display: flex;
   flex-direction: column;
   /* gap: 1rem; */
-  background-color: var(--white);
-  width: 600px;
+  background-color: #ffffff;
+  /* width: 600px; */
   height: fit-content;
   border-radius: 8px;
   padding: 16px 32px;
@@ -125,4 +126,45 @@
   /* identical to box height */
 
   color: #7c7c7c;
+}
+.reportTitle {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 48px;
+
+  color: rgb(56, 56, 56);
+}
+.img {
+  flex: 1;
+  height: 200px;
+  aspect-ratio: 2/1.5;
+  object-fit: cover;
+  border-radius: 24px;
+  color: rgb(56, 56, 56);
+}
+.imgText {
+  font-family: "Poppins";
+  display: block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  /* identical to box height */
+
+  color: #000000;
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.reports {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 24px;
+  /* align-items: center; */
 }
