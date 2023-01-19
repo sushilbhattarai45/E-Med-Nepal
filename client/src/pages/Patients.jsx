@@ -51,11 +51,6 @@ const Patients = () => {
       minWidth: 80,
       align: "center",
     },
-    {
-      id: "action",
-      label: "Action",
-      minWidth: 80,
-    },
   ];
 
   const data = [
@@ -162,11 +157,6 @@ const Patients = () => {
                         align="center"
                       >
                         {row.blood_group}
-                      </TableCell>
-                      <TableCell align="center">
-                        <div className={styles.dlt_btn}>
-                          <MdDelete />
-                        </div>
                       </TableCell>
                     </TableRow>
                   );
