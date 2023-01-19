@@ -53,3 +53,17 @@ export const getOne = async (req, res) => {
     return res.status(400).json({ error: " Server side error" });
   }
 };
+export const deleteDoctor = async (req, res) => {
+  const { d_id } = req.body;
+
+  try {
+    const data = await doctorSchema.deleteOne({
+      d_id: d_id,
+    });
+    return res.status(200).json({
+      message: "Deleted",
+    });
+  } catch (e) {
+    return res.status(700).json({ error: " Server side error" });
+  }
+};
