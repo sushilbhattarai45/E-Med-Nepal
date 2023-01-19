@@ -25,7 +25,7 @@ h2 {
 }
 .department {
   padding: 4px 8px;
-  margin-top: 16px;
+  margin-top: 8px;
 
   border-radius: 4px;
   background-color: var(--primary);
@@ -34,7 +34,7 @@ h2 {
   text-transform: uppercase;
   font-family: "Poppins";
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .severity_con {
   align-items: center;
@@ -69,7 +69,8 @@ h2 {
 }
 .symptoms {
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
+  /* justify-content: space-between; */
 }
 .symptoms_text {
   margin-top: 24px;

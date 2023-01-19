@@ -1,0 +1,70 @@
+.container {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 24px;
+}
+.title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height */
+  color: #000000;
+}
+.row {
+  flex: 1;
+  /* margin-top: 4px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.column {
+  margin-top: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.medicine_name {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height */
+
+  color: #000000;
+}
+.duration {
+  padding: 2px 8px;
+  background: #0197f6;
+  border-radius: 4px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* white */
+
+  color: #f6f7f8;
+}
+.interval {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 96.5%;
+  /* identical to box height, or 12px */
+
+  text-align: right;
+
+  color: #7c7c7c;
+}
