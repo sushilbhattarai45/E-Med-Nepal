@@ -13,14 +13,14 @@ import instance from "../config/axios.js";
 const Patients = () => {
   const getRecentPatients = async () => {
     console.log("okkkk");
-    const patientdata = await instance.post("/hospital/getrecentreport", {
+    const patientdata = await instance.post("/hospital/getrecentpatient", {
       hm_hid: "12345",
     });
     await setData(patientdata.data.data);
   };
   const [data, setData] = React.useState([{}]);
   getRecentPatients();
-  console.log(data);
+  console.log("ok" + data);
   const columns = [
     {
       id: "sn",
@@ -135,7 +135,7 @@ const Patients = () => {
                   return (
                     <TableRow hover tabIndex={-1} key={i}>
                       <TableCell
-                        key={row?.p__id}
+                        key={row?._id}
                         style={{ fontFamily: "Poppins" }}
                       >
                         {i + 1}
@@ -146,7 +146,7 @@ const Patients = () => {
                         style={{ fontFamily: "Poppins" }}
                       >
                         <div className={styles.patient_pic}>
-                          <img src={row.p_profile} className={styles.img} />
+                          <img src={row?.p_profile} className={styles.img} />
                         </div>
                       </TableCell>
 
@@ -160,7 +160,7 @@ const Patients = () => {
                         {row?.p_contact}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        <span className={styles.gender}>{row.gender}</span>
+                        <span className={styles.gender}>{row.p_gender}</span>
                       </TableCell>
                       <TableCell
                         style={{ fontFamily: "Poppins" }}
