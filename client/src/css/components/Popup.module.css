@@ -1,0 +1,48 @@
+.popup {
+  width: 100%;
+  height: 100vh;
+  background-color: #000000b0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup_container {
+  /* width: min(360px, 90%); */
+  height: fit-content;
+  border-radius: 8px;
+  background-color: var(--white);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  border: 1px solid #2d2c2d;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+}
+.title_con {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #2d2c2d;
+}
+.title {
+  font-size: 20px;
+  color: var(--text);
+}
+.cancel_icon {
+  color: var(--gray-text);
+  font-size: 26px;
+  cursor: pointer;
+  margin-top: -5px;
+  margin-right: -5px;
+  border-radius: 50%;
+  transition: 0.3s;
+  padding: 2px;
+}
+.cancel_icon:hover {
+  background-color: #ccc;
+}
