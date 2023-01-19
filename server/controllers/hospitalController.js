@@ -83,6 +83,8 @@ export const getRecentPatient = async (req, res) => {
       const patientdata = patientSchema
         .find({ p_mid: p_mid })
         .sort({ _id: -1 });
+      console.log(patientdata);
+
       patients.push(patientdata);
     });
 
