@@ -79,14 +79,12 @@ export const getRecentPatient = async (req, res) => {
     const newData = await Promise.all(
       data.map(async (item) => {
         const { p_mid } = item;
-        console.log(p_mid);
         const patientdata = await patientSchema
           .find({ p_mid: p_mid })
           .sort({ _id: -1 });
-        return patientdata;
+        return patientdata[0];
       })
     );
-    console.log(data);
 
     return res.status(200).json({ message: "Done", data: newData });
   } catch (e) {
