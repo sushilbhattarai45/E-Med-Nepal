@@ -76,7 +76,7 @@ export const prescription = async (req, res) => {
     let prescription = [];
     data.map((item) => {
       var result = new Date(item?.r_toc?.date);
-      const day = item?.r_prescription[0]?.duration;
+      const day = item.r_prescription[0]?.duration;
       console.log(day);
       result.setDate(result.getDate() + day);
       const durationdate = result.toISOString().split("T")[0];
