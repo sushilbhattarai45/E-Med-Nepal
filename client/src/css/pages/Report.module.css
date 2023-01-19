@@ -166,5 +166,43 @@
   flex-wrap: wrap;
   flex-direction: row;
   gap: 24px;
+  margin-bottom: 4rem;
   /* align-items: center; */
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: -2rem;
+  padding: 8px 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 0 100px; */
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.docProfile {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  /* aspect-ratio: ; */
+  object-fit: cover;
+  margin-right: 8px;
+  /* object-position: 50%; */
+}
+.docInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.hospitalName {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 36px;
+  /* identical to box height */
+
+  color: #000000;
 }
