@@ -76,19 +76,17 @@ export const getRecentPatient = async (req, res) => {
   const { hm_hid } = req.body;
   try {
     const data = await reportSchema.find({ hm_id: hm_hid }).sort({ _id: -1 });
-    const patients = [];
-    data.map((item) => {
-      const { p_mid } = item;
-      console.log(p_mid);
-      const patientdata = patientSchema
-        .find({ p_mid: p_mid })
-        .sort({ _id: -1 });
-      console.log(patientdata);
+    const newData = await Promise.all(
+      data.map(async (item) => {
+        const { p_mid } = item;
+        const patientdata = await patientSchema
+          .find({ p_mid: p_mid })
+          .sort({ _id: -1 });
+        return patientdata[0];
+      })
+    );
 
-      patients.push(patientdata);
-    });
-
-    return res.status(200).json({ message: "Done", data: patients });
+    return res.status(200).json({ message: "Done", data: newData });
   } catch (e) {
     return res.status(400).json({ error: " Server side error" });
   }
