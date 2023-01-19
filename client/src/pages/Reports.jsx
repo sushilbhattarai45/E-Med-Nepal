@@ -10,12 +10,32 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-
+import instance from "../config/axios.js";
 const Reports = () => {
+  const [data, setData] = React.useState([{}]);
+
+  React.useEffect(() => {
+    const getRecentPatients = async () => {
+      const { data } = await instance.post("/hospital/getrecentreport", {
+        hm_hid: "12345",
+      });
+      setData(data.data);
+    };
+    getRecentPatients();
+  });
+
+  // getRecentPatients();
+  // console.log("meow" + JSON.stringify(data));
+
   const columns = [
     {
       id: "sn",
       label: "SN",
+      minWidth: 50,
+    },
+    {
+      id: "name",
+      label: "Name",
       minWidth: 50,
     },
     {
@@ -40,36 +60,36 @@ const Reports = () => {
       minWidth: 80,
     },
   ];
-  const data = [
-    {
-      id: 1,
-      department: "Nag,Kan and ghati",
-      severity: "High",
-      symptoms: ["Fever", "Cough", "Cold"],
-      date: "20 May, 2020",
-    },
-    {
-      id: 2,
-      department: "Nag,Kan and ghati",
-      severity: "Medium",
-      symptoms: ["Fever", "Cough", "Cold"],
-      date: "20 May, 2020",
-    },
-    {
-      id: 3,
-      department: "Nag,Kan and ghati",
-      severity: "Low",
-      symptoms: ["Fever", "Cough", "Cold"],
-      date: "20 May, 2020",
-    },
-    {
-      id: 4,
-      department: "Nag,Kan and ghati",
-      severity: "High",
-      symptoms: ["Fever", "Cough", "Cold", "Fever", "Cough", "Cold"],
-      date: "20 May, 2020",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     department: "Nag,Kan and ghati",
+  //     severity: "High",
+  //     symptoms: ["Fever", "Cough", "Cold"],
+  //     date: "20 May, 2020",
+  //   },
+  //   {
+  //     id: 2,
+  //     department: "Nag,Kan and ghati",
+  //     severity: "Medium",
+  //     symptoms: ["Fever", "Cough", "Cold"],
+  //     date: "20 May, 2020",
+  //   },
+  //   {
+  //     id: 3,
+  //     department: "Nag,Kan and ghati",
+  //     severity: "Low",
+  //     symptoms: ["Fever", "Cough", "Cold"],
+  //     date: "20 May, 2020",
+  //   },
+  //   {
+  //     id: 4,
+  //     department: "Nag,Kan and ghati",
+  //     severity: "High",
+  //     symptoms: ["Fever", "Cough", "Cold", "Fever", "Cough", "Cold"],
+  //     date: "20 May, 2020",
+  //   },
+  // ];
   const symptoms = [1, 2, 3, 4, 5];
   return (
     <div className={styles.reports_con}>
@@ -87,7 +107,7 @@ const Reports = () => {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {columns?.map((column) => (
                   <TableCell
                     key={column.id}
                     align={column.align}
@@ -103,7 +123,7 @@ const Reports = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row, i) => {
+              {data?.map((row, i) => {
                 return (
                   <>
                     <TableRow hover tabIndex={-1} key={i}>
@@ -111,17 +131,22 @@ const Reports = () => {
                         {i + 1}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.department}
+                        {row.p_name}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.severity === "High" && (
-                          <span className={styles.high}>{row.severity}</span>
+                        {row.r_department}
+                      </TableCell>
+                      <TableCell style={{ fontFamily: "Poppins" }}>
+                        {row.r_priority === "HIGH" && (
+                          <span className={styles.high}>{row.r_priority}</span>
                         )}
-                        {row.severity === "Medium" && (
-                          <span className={styles.medium}>{row.severity}</span>
+                        {row.r_priority === "MEDIUM" && (
+                          <span className={styles.medium}>
+                            {row.r_priority}
+                          </span>
                         )}
-                        {row.severity === "Low" && (
-                          <span className={styles.low}>{row.severity}</span>
+                        {row.r_priority === "LOW" && (
+                          <span className={styles.low}>{row.r_priority}</span>
                         )}
                       </TableCell>
                       <TableCell
@@ -130,10 +155,10 @@ const Reports = () => {
                           display: "flex",
                           gap: "6px",
                           flexWrap: "wrap",
-                          width:"200px"
+                          width: "200px",
                         }}
                       >
-                        {row.symptoms.map((symptom, i) => {
+                        {row?.r_symptoms?.map((symptom, i) => {
                           return (
                             <span className={styles.fever} key={i}>
                               {symptom}
@@ -142,7 +167,7 @@ const Reports = () => {
                         })}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.date}
+                        {row?.r_toc?.date + "    " + row?.r_toc?.time}
                       </TableCell>
                     </TableRow>
                   </>

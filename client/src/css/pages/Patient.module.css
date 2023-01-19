@@ -1,0 +1,103 @@
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(56, 56, 56);
+  margin-bottom: 2rem;
+}
+.reportTitle {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 48px;
+
+  color: rgb(56, 56, 56);
+}
+.reports {
+  display: flex;
+  /* outline: solid 1px red; */
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px 40px;
+  /* justify-content: space-between; */
+
+  /* align-items: center; */
+}
+.row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+.profileContent {
+  flex: .5;
+  /* background-color: #11233433; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.patient_image {
+  height: 198px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 24px;
+}
+.patient_name {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+}
+.age {
+  margin-top: -5px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+}
+.phoneno .address .email {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #0d1317;
+}
+.extraContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 48px;
+  color: var(--white);
+}
+
+.bloodgroup {
+  flex: 1;
+  background-color: #fa5252;
+  padding: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+}
+.gender {
+  flex: 1;
+  padding: 24px;
+  background-color: #f87ffb;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+
+  /* background-color: red; */
+}
+.prescription {
+  flex: 1;
+}

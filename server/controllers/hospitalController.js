@@ -83,10 +83,12 @@ export const getRecentPatient = async (req, res) => {
       const patientdata = patientSchema
         .find({ p_mid: p_mid })
         .sort({ _id: -1 });
+      console.log(patientdata);
+
       patients.push(patientdata);
     });
 
-    return res.status(200).json({ message: "Done", data: data });
+    return res.status(200).json({ message: "Done", data: patients });
   } catch (e) {
     return res.status(400).json({ error: " Server side error" });
   }

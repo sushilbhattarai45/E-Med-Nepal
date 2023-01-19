@@ -19,7 +19,7 @@ html,body{
     background-color: var(--bg);
 }
 .layout_container{
-  padding-left:100px;
+  padding-left:130px;
   padding-right: 50px;
   padding-top:20px;
 }
