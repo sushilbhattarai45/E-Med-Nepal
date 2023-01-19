@@ -25,7 +25,7 @@ export const postHospital = async (req, res) => {
     });
     const exists = await hospitalSchema.find({ hm_hid: hm_hid });
 
-    if (!exists || exists?.length == 0) {
+    if (!exists || exists.length == 0) {
       const data = await hospital.save();
       return res.json({ message: "Done", statuscode: 200, data: data });
     } else {
@@ -43,7 +43,7 @@ export const login = async (req, res) => {
       hm_password: hm_password,
     });
 
-    if (!exists || exists?.length == 0) {
+    if (!exists || exists.length == 0) {
       return res.status(400).json({ message: "Wrong Credentials" });
     } else {
       return res
