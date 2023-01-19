@@ -22,9 +22,7 @@ const patient = new mongoose.Schema({
   p_profile: {
     type: String,
   },
-  ads_type: {
-    type: String,
-  },
+
   p_status: {
     type: String,
     default: "ACTIVE",
