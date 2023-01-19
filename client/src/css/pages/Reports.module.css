@@ -1,0 +1,18 @@
+.reports_con {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 8px;
+    gap: 1rem;
+  }
+  .reports_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    height: 60px;
+  }
+  .title {
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(56, 56, 56);
+  }
