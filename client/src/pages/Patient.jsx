@@ -15,18 +15,26 @@ const Patient = () => {
 
       setPdata(data.data.data[0]);
     };
+    const getCurrentPrescriptions = async () => {
+      const data = await instance.post("/report/getcurrentprescription", {
+        p_mid: "9893586891",
+      });
+
+      setCurrentMedicine(data.data.data);
+    };
+
     const getMedicalData = async () => {
       const data = await instance.post("/report/getreportofone", {
         p_mid: "9893586891",
       });
-
       setPMedicaldata(data.data.data);
     };
-
     getPatientData();
     getMedicalData();
+    getCurrentPrescriptions();
   });
 
+  const [currentmedicine, setCurrentMedicine] = React.useState();
   const [pdata, setPdata] = React.useState();
   const [pmedicaldata, setPMedicaldata] = React.useState();
 
@@ -56,7 +64,7 @@ const Patient = () => {
             <div className={styles.gender}>{pdata?.p_gender}</div>
           </div>
           <div className={styles.prescription}>
-            <PrescriptionDisplay />
+            <PrescriptionDisplay data={currentmedicine} />
           </div>
         </div>
         <div style={{ marginTop: 60 }}>

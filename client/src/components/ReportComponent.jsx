@@ -12,8 +12,8 @@ export default function ReportComponent({ data }) {
             <div className={styles.department}>{data?.r_department}</div>
           </div>
           <div className={styles.severity_con}>
-            <div className={styles.severity_heading}>{data?.p_priority}</div>
-            <div className={styles.severity_cond}>{data?.p_priority}</div>
+            <div className={styles.severity_heading}>Severity</div>
+            <div className={styles.severity_cond}>{data?.r_priority}</div>
           </div>
         </div>
         <div className={styles.symptoms_text}>Symptoms</div>
