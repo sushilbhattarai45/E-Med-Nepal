@@ -16,6 +16,9 @@ const patient = new mongoose.Schema({
   p_contact: {
     type: Number,
   },
+  p_password: {
+    type: String,
+  },
   p_gender: {
     type: String,
   },

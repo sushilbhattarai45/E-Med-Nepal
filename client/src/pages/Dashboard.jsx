@@ -11,8 +11,28 @@ import {
 } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import AddoctorPopup from "../components/AddoctorPopup";
+import instance from "../config/axios.js";
 
 const Dashboard = () => {
+  React.useEffect(() => {
+    const getDoctors = async () => {
+      const data = await instance.post("/hospital/getalldoctors", {
+        d_hid: "12345",
+      });
+
+      setDoctor(data.data.data);
+    };
+    getDoctors();
+  },[]);
+  
+  const deleteDoctor = async (d_id) => {
+    const data = await instance.post("/doctor/delete", {
+      d_id: d_id,
+    });
+    window.location.reload();
+  };
+  const [doctor, setDoctor] = React.useState([{}]);
+
   const columns = [
     {
       id: "sn",
@@ -56,53 +76,53 @@ const Dashboard = () => {
     },
   ];
 
-  const data = [
-    {
-      id: 1,
-      name: "Dr. John Doe",
-      profile_pic: "/doctor.webp",
-      address: "Kathmandu",
-      contact: "984567890",
-      specialization: "Cardiologist",
-      gender: "Male",
-    },
-    {
-      id: 2,
-      name: "Dr. John Doe",
-      profile_pic: "/doctor.webp",
-      address: "Kathmandu",
-      contact: "984567890",
-      specialization: "Cardiologist",
-      gender: "Female",
-    },
-    {
-      id: 3,
-      name: "Dr. John Doe",
-      profile_pic: "/doctor.webp",
-      address: "Kathmandu",
-      contact: "984567890",
-      specialization: "Cardiologist",
-      gender: "Female",
-    },
-    {
-      id: 4,
-      name: "Dr. John Doe",
-      profile_pic: "/doctor.webp",
-      address: "Kathmandu",
-      contact: "984567890",
-      specialization: "Cardiologist",
-      gender: "Female",
-    },
-    {
-      id: 5,
-      name: "Dr. John Doe",
-      profile_pic: "/doctor.webp",
-      address: "Kathmandu",
-      contact: "984567890",
-      specialization: "Cardiologist",
-      gender: "Female",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     name: "Dr. John Doe",
+  //     profile_pic: "/doctor.webp",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     specialization: "Cardiologist",
+  //     gender: "Male",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Dr. John Doe",
+  //     profile_pic: "/doctor.webp",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     specialization: "Cardiologist",
+  //     gender: "Female",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Dr. John Doe",
+  //     profile_pic: "/doctor.webp",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     specialization: "Cardiologist",
+  //     gender: "Female",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Dr. John Doe",
+  //     profile_pic: "/doctor.webp",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     specialization: "Cardiologist",
+  //     gender: "Female",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Dr. John Doe",
+  //     profile_pic: "/doctor.webp",
+  //     address: "Kathmandu",
+  //     contact: "984567890",
+  //     specialization: "Cardiologist",
+  //     gender: "Female",
+  //   },
+  // ];
 
   const [popup, setPopup] = React.useState(false);
   return (
@@ -138,10 +158,14 @@ const Dashboard = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map((row, i) => {
+                {doctor.map((row, i) => {
+                  console.log(row);
                   return (
                     <TableRow hover tabIndex={-1} key={i}>
-                      <TableCell key={row.id} style={{ fontFamily: "Poppins" }}>
+                      <TableCell
+                        key={row._id}
+                        style={{ fontFamily: "Poppins" }}
+                      >
                         {i + 1}
                       </TableCell>
 
@@ -150,27 +174,32 @@ const Dashboard = () => {
                         style={{ fontFamily: "Poppins" }}
                       >
                         <div className={styles.doctor_pic}>
-                          <img src={row.profile_pic} className={styles.img} />
+                          <img src={row?.d_profile} className={styles.img} />
                         </div>
                       </TableCell>
 
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.name}
+                        {row?.d_name}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.address}
+                        {row?.d_address}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.contact}
+                        {row?.d_contact}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.specialization}
+                        {row?.d_specialization}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        <span className={styles.gender}>{row.gender}</span>
+                        <span className={styles.gender}>{row?.d_gender}</span>
                       </TableCell>
                       <TableCell align="center">
-                        <div className={styles.dlt_btn}>
+                        <div
+                          className={styles.dlt_btn}
+                          onClick={async () => {
+                            await deleteDoctor(row?.d_id);
+                          }}
+                        >
                           <MdDelete />
                         </div>
                       </TableCell>

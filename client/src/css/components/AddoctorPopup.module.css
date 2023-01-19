@@ -3,10 +3,12 @@
     display: flex;
     gap: 10px;
     flex-direction: column;
+    overflow: auto;
+    max-height: 80vh;
 }
 .img_con{
-    width: 200px;
-    height:200px;
+    width: 150px;
+    height:150px;
     border-radius:8px;
     overflow: hidden;
     position: relative;

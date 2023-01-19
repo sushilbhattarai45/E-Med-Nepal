@@ -1,3 +1,4 @@
+
 import React from "react";
 import styles from "../css/pages/Report.module.css";
 import { BiArrowBack } from "react-icons/bi";
@@ -65,6 +66,16 @@ const Report = () => {
               );
             })}
           </div>
+        </div>
+      </div>
+      <div className={styles.footer}>
+        <div className={styles.hospitalName}>Bir Hospital</div>
+        <div className={styles.docInfo}>
+          <img
+            className={styles.docProfile}
+            src="https://picsum.photos/200/200"
+          />
+          <div>Dr.Ram baram Yadav</div>
         </div>
       </div>
     </>

@@ -13,6 +13,7 @@ import patientRoutes from "./routes/patientRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import hospitalRoutes from "./routes/hospitalRoutes.js";
+App.use("/uploads", Express.static("uploads"));
 
 App.listen(PORT, (req, res) => {
   console.log("listening on port " + PORT);
