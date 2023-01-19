@@ -1,5 +1,5 @@
 import moment from "moment";
-export const testuser = async (req, res) => {
+export const postPatient = async (req, res) => {
   try {
     res.status(200).json({ error: false, msg: "testuser" });
   } catch (error) {
