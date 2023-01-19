@@ -7,17 +7,13 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
-  Typography,
 } from "@mui/material";
-import { MdDelete } from "react-icons/md";
-import axiosinstance from "../config/axios";
-
+import instance from "../config/axios.js";
 const Patients = () => {
   const getRecentPatients = async () => {
     console.log("okkkk");
-    const patientdata = await axiosinstance.post("/hospital/getrecentpatient", {
+    const patientdata = await instance.post("/hospital/getrecentreport", {
       hm_hid: "12345",
     });
     await setData(patientdata.data.data);
