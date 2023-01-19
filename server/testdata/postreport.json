@@ -1,0 +1,26 @@
+{
+  "p_id": "385881217",
+  "p_name": "Sushil",
+  "d_id": "385881217",
+  "r_symptoms": ["fever", "headache", "chest pain"],
+  "r_priority": "HIGH",
+  "hm_name": "Kalika",
+  "r_bg": "A+",
+  "r_description": "Very good",
+  "r_doctorname": "Ram yadav",
+  "hm_id": "a12345",
+  "r_department": "Neurology",
+  "r_prescription": [
+    {
+      "medicine": "Covax 122",
+      "duration": "20 minutes",
+      "interval": "after meal in 6 hours"
+    }
+  ],
+  "r_reports": [
+    {
+      "name": "X Ray",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
+    }
+  ]
+}

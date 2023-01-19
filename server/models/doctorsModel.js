@@ -1,40 +1,43 @@
 import mongoose from "mongoose";
 
-const patient = new mongoose.Schema({
-  p_name: {
+const doctors = new mongoose.Schema({
+  d_id: {
     type: String,
   },
-  p_mid: {
+  d_name: {
     type: String,
   },
-  p_bg: {
+  d_specialization: {
     type: String,
   },
-  p_address: {
+  d_address: {
     type: String,
   },
-  p_contact: {
+  d_contact: {
     type: Number,
   },
-  p_gender: {
+  d_hid: {
     type: String,
   },
-  p_profile: {
+  d_gender: {
+    type: String,
+  },
+  d_profile: {
     type: String,
   },
 
-  p_status: {
+  d_status: {
     type: String,
     default: "ACTIVE",
   },
-  p_dob: {
+  d_dob: {
     type: String,
   },
-  p_toc: {
+  d_toc: {
     date: { type: String },
     time: { type: String },
   },
 });
 
-const patientSchema = mongoose.model("patients", patient);
-export default patientSchema;
+const doctorSchema = mongoose.model("doctor", doctors);
+export default doctorSchema;
