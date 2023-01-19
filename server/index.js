@@ -2,6 +2,7 @@ import Express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 const App = Express();
+import { connectDB } from "./database/connect.js";
 App.use(cors());
 const PORT = 3000;
 App.use(Express.json());
