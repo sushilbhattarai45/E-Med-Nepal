@@ -1,0 +1,70 @@
+.doctors_con {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 8px;
+  gap: 1rem;
+}
+.doctors_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  height: 60px;
+}
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  color: rgb(56, 56, 56);
+}
+.add_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: var(--primary);
+  padding: 8px;
+  width: 170px;
+  height: 50px;
+  gap: 6px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.add_btn:hover {
+  background-color: var(--light-primary);
+}
+.add_text {
+  color: var(--white);
+  font-size: 18px;
+}
+.add_plus {
+  color: var(--white);
+  font-size: 25px;
+}
+.doctor_pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dlt_btn{
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #ff0000;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: var(--white);
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+.gender{
+    padding: 6px 10px;
+    background-color: #cccc;
+    border-radius: 4px;
+}
