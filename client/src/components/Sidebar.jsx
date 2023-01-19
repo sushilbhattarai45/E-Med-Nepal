@@ -12,9 +12,9 @@ const Sidebar = () => {
   return (
     <>
       <div className={styles.sidebar_con}>
-        <div className={styles.sidebar_top}>
+        <NavLink to="/" className={styles.sidebar_top}>
           <FaHospitalAlt />
-        </div>
+        </NavLink>
         <div className={styles.sidebar_mid}>
           <NavLink
             className={pathname === "/app" ? styles.active : styles.link_con}

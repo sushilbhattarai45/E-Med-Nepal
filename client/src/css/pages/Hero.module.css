@@ -1,0 +1,183 @@
+.hero_container {
+  display: flex;
+  min-height: calc(100vh - 75px);
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+  justify-content: space-between;
+  position: relative;
+}
+.left_side {
+  display: flex;
+  width: 50%;
+  padding: 10px;
+  flex-direction: column;
+  gap: 1.3rem;
+  /* border: 1px solid red; */
+}
+.hero_text {
+  display: flex;
+  flex-direction: column;
+}
+.hero_text h1 {
+  font-size: 2.9rem;
+  font-weight: 600;
+}
+.hero_text p {
+  margin-top: -15px;
+  font-size: 1.1rem;
+}
+.name {
+  color: var(--primary);
+}
+
+/* .search_con {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  height: 55px;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  overflow: hidden;
+  padding: 0 5px;
+}
+.search_con input[type="text"] {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  font-size: 1.1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: rgb(101, 101, 101);
+}
+/*place holder color*/
+/* .search_con input[type="text"]::placeholder {
+  color: rgb(200, 200, 200);
+  font-weight: 400;
+}
+.search_con .search_btn {
+  width: 50px;
+  height: 80%;
+  background-color: var(--primary);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: 0.3s;
+}
+.search_con .search_btn:hover {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  background-color: var(--light-primary);
+}
+.search_con .search_btn:hover .srh {
+  scale: 1.02;
+} */
+
+.btn_con{
+ display: flex;
+ gap: 1rem;
+}
+.login1_btn{
+  width: fit-content;
+  height: 50px;
+  background-color: var(--primary);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--white);
+  padding: 0 20px;
+  font-size: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: 0.3s;
+}
+.login2_btn{
+  width: fit-content;
+  height: 50px;
+  background-color: var(--white);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--primary);
+  padding: 0 20px;
+  font-size: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: 0.3s;
+}
+.login1_btn:hover{
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  background-color: var(--light-primary);
+}
+.login2_btn:hover{
+  box-shadow: rgba(17, 17, 26, 0.01) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.right_side {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+  justify-content: center;
+}
+.illus {
+  width: 550px;
+  height: 550px;
+}
+.box1 {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-image: linear-gradient(to right top, var(--primary), var(--light-primary), #7a97fd);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: var(--white);
+  position: absolute;
+  bottom: 40px;
+  left: 45%;
+  animation: updown 1.3s infinite alternate;
+}
+.box2 {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-image: linear-gradient(to right top, var(--primary), var(--light-primary), #7a97fd);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: #fff;
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  animation: updown 1.5s infinite alternate;
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

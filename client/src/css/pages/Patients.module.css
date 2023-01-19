@@ -4,4 +4,82 @@
   padding: 2px 8px;
   gap: 1rem;
 }
-
+.patients_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  height: 60px;
+}
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  color: rgb(56, 56, 56);
+}
+.search_con{
+    display: flex;
+    align-items: center;
+    min-width: 350px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.search{
+    border: none;
+    outline: none;
+    width: 90%;
+    height: 45px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius:8px;
+    padding: 0 12px;
+    font-size: 18px;
+    background-color: rgb(237, 237, 237);
+    font-family: "Poppins",sans-serif;
+}
+.icon_con{
+  background-color: var(--primary);
+  width: 15%;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.icon{
+    color: var(--white);
+    font-size: 25px;
+}
+.icon_con:hover{
+    background-color: var(--light-primary);
+}
+.patients_listing{
+   margin-top: 10px;
+}
+.patient_pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dlt_btn{
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #ff0000;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: var(--white);
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+.gender{
+    padding: 6px 10px;
+    background-color: #cccc;
+    border-radius: 4px;
+}

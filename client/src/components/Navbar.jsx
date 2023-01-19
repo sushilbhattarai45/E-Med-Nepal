@@ -8,11 +8,11 @@ const Navbar = () => {
         <span className={styles.logo}></span>
         <p className={styles.logo_name}>Logo</p>
        </div>
-       <div className={styles.right}>
+       {/* <div className={styles.right}>
         <div className={styles.login_btn}>
           <p>Login</p>
         </div>
-       </div>
+       </div> */}
     </div>
     </>
   )
