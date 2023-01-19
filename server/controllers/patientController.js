@@ -55,3 +55,22 @@ export const getOne = async (req, res) => {
     return res.status(400).json({ error: " Server side error" });
   }
 };
+export const login = async (req, res) => {
+  const { p_mid, p_password } = req.body;
+  try {
+    const exists = await patientSchema.findOne({
+      p_mid: p_mid,
+      p_password: p_password,
+    });
+
+    if (!exists || exists.length == 0) {
+      return res.status(400).json({ message: "Wrong Credentials" });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "Done", statuscode: 200, data: exists });
+    }
+  } catch (e) {
+    return res.status(700).json({ error: " Server side error" });
+  }
+};
