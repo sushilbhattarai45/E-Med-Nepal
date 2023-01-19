@@ -68,3 +68,26 @@ export const getOne = async (req, res) => {
     return res.status(400).json({ error: " Server side error" });
   }
 };
+export const prescription = async (req, res) => {
+  const { p_mid } = req.body;
+  try {
+    const data = await reportSchema.find({ p_mid: p_mid }).sort({ _id: -1 });
+    let i = 0;
+    let prescription = [];
+    data.map((item) => {
+      var result = new Date(item?.r_toc?.date);
+      const day = item?.r_prescription[0]?.duration;
+      console.log(day);
+      result.setDate(result.getDate() + day);
+      const durationdate = result.toISOString().split("T")[0];
+      const todaydate = moment().format().split("T")[0];
+      if (!(todaydate > durationdate)) {
+        prescription.push(item);
+      }
+    });
+
+    return res.status(200).json({ message: "Done", data: prescription });
+  } catch (e) {
+    return res.status(400).json({ error: " Server side error" });
+  }
+};

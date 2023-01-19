@@ -6,11 +6,13 @@ import multer from "multer";
 import {
   postReport,
   getReportOfOne,
+  prescription,
   getOne,
 } from "../controllers/reportController.js";
 router.route("/postreport").post(postReport);
 router.route("/getreportofone").post(getReportOfOne);
 router.route("/getone").post(getOne);
+router.route("/getcurrentprescription").post(prescription);
 
 const storage = multer.diskStorage({
   filename: function (req, file, cb) {
