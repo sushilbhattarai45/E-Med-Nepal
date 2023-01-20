@@ -42,12 +42,11 @@ export default function Router() {
           element: <Patient />,
         },
         {
-          path: "report/:id",
+          path: "report/:rid/:pid",
           element: <Report />,
         },
         {
-          path: "reportPost/:id",
-          element: <PostReport />,
+          path: "reportpost/:id",
         },
       ],
     },
