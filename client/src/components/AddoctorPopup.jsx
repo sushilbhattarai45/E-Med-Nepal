@@ -17,7 +17,7 @@ const AddoctorPopup = ({ state }) => {
     d_name: "",
     d_address: "",
     d_contact: "",
-    d_id: "23213",
+    d_id: Date.now(),
     d_hid: "12345",
     d_dob: "",
     d_profile: "",

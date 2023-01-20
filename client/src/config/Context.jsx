@@ -10,6 +10,9 @@ const Context = ({ children }) => {
     getPatientData();
   }, [ptoken])
   
+  // const getHospitalData = async () => {
+  //   const data = await axios.get("/hospital/getonehospital",
+  // }
   const getPatientData = async () => {
     const data = await axios.post("/patient/getonepatient", {
       p_mid: ptoken,

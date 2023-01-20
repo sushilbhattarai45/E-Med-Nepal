@@ -47,6 +47,7 @@ export default function Router() {
         },
         {
           path: "reportpost/:id",
+          element: <PostReport />,
         },
       ],
     },
