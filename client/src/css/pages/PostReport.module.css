@@ -1,0 +1,72 @@
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(56, 56, 56);
+  margin-bottom: 2rem;
+}
+.container {
+  margin-bottom: 2rem;
+  flex: 1;
+}
+.form {
+  flex: 1;
+  margin-right: 10rem;
+}
+.medicine_con {
+  display: flex;
+  /* gap: 12px; */
+  align-items: center;
+  justify-content: space-between;
+}
+.remove_btn {
+  width: 25px;
+  height: 25px;
+  border-radius: 2px;
+  background-color: rgb(255, 32, 32);
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  font-family: "Poppins";
+  margin-left: 30px;
+  font-size: 25px;
+}
+.input_label {
+  font-size: 17px;
+  font-family: "Poppins";
+  color: #333;
+}
+img {
+  height: 50px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.reports {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 24px;
+  margin-bottom: 4rem;
+  margin-top: 1rem;
+  /* align-items: center; */
+}
+.img2 {
+  flex: 1;
+  height: 100px;
+  aspect-ratio: 2/1.5;
+  object-fit: cover;
+  border-radius: 8px;
+  color: rgb(56, 56, 56);
+}
+.imgText {
+  font-family: "Poppins";
+  display: block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  /* identical to box height */
+
+  color: #000000;
+}

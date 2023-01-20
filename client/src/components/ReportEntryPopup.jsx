@@ -2,7 +2,7 @@ import React from "react";
 import Popup from "./Popup";
 import styles from "../css/components/ReportEntryPopup.module.css";
 import { AiOutlinePlus } from "react-icons/ai";
-import {RxCross2} from "react-icons/rx"
+import { RxCross2 } from "react-icons/rx";
 
 const ReportEntryPopup = ({ state }) => {
   const { popup, setPopup } = state;
@@ -21,7 +21,7 @@ const ReportEntryPopup = ({ state }) => {
   };
 
   let addFormFields = () => {
-    setFormValues([...formValues, { medicine: "", time: "", duration: ""} ]);
+    setFormValues([...formValues, { medicine: "", time: "", duration: "" }]);
   };
 
   let removeFormFields = (i) => {
@@ -45,6 +45,46 @@ const ReportEntryPopup = ({ state }) => {
               type="text"
               placeholder="Enter Hospital Name"
             />
+            <label htmlFor="upload-photo">
+              {pic ? (
+                <div className={styles.img_con}>
+                  <img src={pic} alt="doctor_pic" className={styles.img} />
+                  <span onClick={() => setPic("")}>
+                    <MdCancel />
+                  </span>
+                </div>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  component="label"
+                  startIcon={<AiFillCamera />}
+                >
+                  Upload Photo
+                  <input
+                    required
+                    hidden
+                    accept="image/*"
+                    type="file"
+                    onChange={getImg}
+                  />
+                </Button>
+              )}
+            </label>
+            <Button
+              variant="contained"
+              component="label"
+              style={{ marginTop: 24, width: "100%" }}
+              onClick={() => {
+                setReports((prev) => [
+                  ...prev,
+                  { img: imgUrl, imgText: imgText },
+                ]);
+                console.log({ img: imgUrl, imgText: imgText });
+              }}
+            >
+              Upload Report
+            </Button>
           </div>
           <div className={styles.input_box}>
             <div className={styles.input_label}>Doctor Name</div>
@@ -134,7 +174,7 @@ const ReportEntryPopup = ({ state }) => {
                       className={styles.remove_btn}
                       onClick={() => removeFormFields(index)}
                     >
-                      <RxCross2/>
+                      <RxCross2 />
                     </button>
                   ) : null}
                 </div>

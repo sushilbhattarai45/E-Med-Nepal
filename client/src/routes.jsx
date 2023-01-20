@@ -7,6 +7,7 @@ import Reports from "./pages/Reports";
 import Patients from "./pages/Patients";
 import Patient from "./pages/Patient";
 import Report from "./pages/Report";
+import PostReport from "./pages/PostReport";
 
 export default function Router() {
   return useRoutes([
@@ -37,12 +38,16 @@ export default function Router() {
           element: <Patients />,
         },
         {
-            path:"patient/:id",
-            element:<Patient/>
+          path: "patient/:id",
+          element: <Patient />,
         },
         {
-            path:"report/:id",
-            element:<Report/>
+          path: "report/:id",
+          element: <Report />,
+        },
+        {
+          path: "reportPost/:id",
+          element: <PostReport />,
         },
       ],
     },
