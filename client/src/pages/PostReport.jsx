@@ -4,13 +4,23 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import InputAdornment from "@mui/material/InputAdornment";
+import Autocomplete from "@mui/material/Autocomplete";
 
 import { AiOutlinePlus, AiFillCamera } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import { MdCancel } from "react-icons/md";
+import axios from "../config/axios";
 
 const SeverityLabels = ["High", "Medium", "Low"];
-import axios from "../config/axios";
+const Departments = [
+  "Physician",
+  "Phychology",
+  "Obstetrology &  Gynaecology ",
+  "Neurology",
+  "Radiology",
+  "Cardiology",
+];
 
 const PostReport = () => {
   const [formValues, setFormValues] = React.useState([
@@ -22,6 +32,7 @@ const PostReport = () => {
   const [imgText, setImgText] = React.useState();
   const [pic, setPic] = React.useState();
   const [imgUrl, setImgUrl] = React.useState();
+  const [doctorList, setDoctorList] = React.useState([]);
 
   let addFormFields = () => {
     setFormValues([...formValues, { medicine: "", time: "", duration: "" }]);
@@ -53,13 +64,6 @@ const PostReport = () => {
     setImgUrl(imgUrl);
   };
 
-  //   const getDoctors = async () => {
-  //     const data = await axios.post("/hospital/getAllDoctors", {
-  //       d_hid: "12345",
-  //     });
-  //     console.log(data.data);
-  //     return data.data.data;
-  //   };
   const handleReportAddition = (data) => {
     if (data?.name?.trim() !== "" && data.photo) {
       setReports((prev) => [...prev, data]);
@@ -70,6 +74,19 @@ const PostReport = () => {
       return;
     }
   };
+
+  const getDoctors = async () => {
+    const data = await axios.post("/hospital/getAllDoctors", {
+      d_hid: "12345",
+    });
+    console.log(data.data.data);
+    if (data.data.data) {
+      setDoctorList(data.data.data);
+    }
+  };
+  React.useEffect(() => {
+    getDoctors();
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.title}>Post Report</div>
@@ -84,38 +101,45 @@ const PostReport = () => {
       >
         <div>
           {/* //doctor */}
-
+          {/* <div style={{ flex: 1, flexDirection: "row" }}> */}
           <TextField
             id="outlined-select-currency"
             select
             label="Department"
-            style={{ width: "40%" }}
+            //   sx={{ width: "40%" }}
           >
-            {[1, 2, 3].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
+            {Departments.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
               </MenuItem>
             ))}
           </TextField>
-          {/*  */}
-          <TextField
-            id="outlined-select-currency"
-            select
-            label="Doctor Name"
-            style={{ width: "40%" }}
-          >
-            {[1, 2, 3, 4, 5]?.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+          {doctorList && (
+            <Autocomplete
+              style={{ display: "inline-block" }}
+              disablePortal
+              id="combo-box-demo"
+              options={[
+                ...doctorList.map((doc) => ({
+                  label: doc.d_name,
+                  value: doc.d_name,
+                })),
+              ]}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  sx={{ width: "100%", flex: 1 }}
+                  label="Doctor's Name"
+                />
+              )}
+            />
+          )}
           {/*  */}
           <TextField
             id="outlined-select-currency"
             select
             label="Patient Severity"
-            style={{ width: "15%" }}
+            //   style={{ width: "15%" }}
           >
             {SeverityLabels.map((option) => (
               <MenuItem key={`severity-${option}`} value={option}>
@@ -123,20 +147,19 @@ const PostReport = () => {
               </MenuItem>
             ))}
           </TextField>
+          {/* </div> */}
           <TextField
             id="outlined-multiline-static"
-            label="Multiline"
+            label="Description"
             multiline
             rows={4}
-            defaultValue="Default Value"
             style={{ width: "48%" }}
           />
           <TextField
             id="outlined-multiline-static"
-            label="Multiline"
+            label="Symptoms (Eg: Cough, Fever) "
             multiline
             rows={4}
-            defaultValue="Default Value"
             style={{ width: "48%" }}
           />
           <div
@@ -168,6 +191,12 @@ const PostReport = () => {
                 <TextField
                   id="outlined-select-currency"
                   label="Duration"
+                  type={"number"}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="start">days</InputAdornment>
+                    ),
+                  }}
                   style={{ width: "15%" }}
                 />
                 {index ? (
