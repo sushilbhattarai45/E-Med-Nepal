@@ -154,11 +154,7 @@ const Patients = () => {
                               margin: 0,
                             }}
                           >
-                            {" "}
-                            <img
-                              src={row?.p_profile}
-                              className={styles.img}
-                            />{" "}
+                            <img src={row?.p_profile} className={styles.img} />{" "}
                           </NavLink>
                         </div>
                       </TableCell>

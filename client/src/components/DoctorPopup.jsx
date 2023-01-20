@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import Popup from "./Popup";
 import styles from "../css/components/DoctorPopup.module.css";
 import { Button, TextField } from "@mui/material";
@@ -10,8 +10,8 @@ import { ContextProvider } from "../config/Context";
 const DoctorPopup = ({ state }) => {
   const [id, setId] = useState("");
   const [pass, setPass] = useState("");
-  const {hp} = useContext(ContextProvider);
-  const [hospitalData,setHospitalData] = hp;
+  const { hp } = useContext(ContextProvider);
+  const [hospitalData, setHospitalData] = hp;
   const navigate = useNavigate();
   const { popup, setPopup } = state;
   const close = () => {

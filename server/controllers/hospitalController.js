@@ -91,3 +91,14 @@ export const getRecentPatient = async (req, res) => {
     return res.status(400).json({ error: " Server side error" });
   }
 };
+export const getone = async (req, res) => {
+  const { hm_hid } = req.body;
+  try {
+    const data = await hospitalSchema
+      .find({ hm_hid: hm_hid })
+      .sort({ _id: -1 });
+    return res.status(200).json({ message: "Done", data: data });
+  } catch (e) {
+    return res.status(400).json({ error: " Server side error" });
+  }
+};

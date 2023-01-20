@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Popup from "./Popup";
 import { TextField, MenuItem, Button } from "@mui/material";
 import styles from "../css/components/AddoctorPopup.module.css";
@@ -7,10 +7,12 @@ import { BsArrowUpRight } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 import axios from "../config/axios";
 import { LoadingButton } from "@mui/lab";
-
+import { ContextProvider } from "../config/Context";
 const AddoctorPopup = ({ state }) => {
   const { popup, setPopup } = state;
   const [pic, setPic] = React.useState("");
+  const { hp } = useContext(ContextProvider);
+
   const [imgUrl, setImgUrl] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState({
@@ -100,20 +102,25 @@ const AddoctorPopup = ({ state }) => {
 
   const handleClick = async () => {
     //check if all fields are filled
+    alert(hp.hp_id);
+
     if (
       data.d_name &&
       data.d_address &&
       data.d_contact &&
-      data.d_id &&
       data.d_hid &&
       data.d_dob &&
+      data.d_id &&
       data.d_gender &&
       data.d_bg &&
       imgUrl &&
       data.d_specialization
     ) {
       setLoading(true);
-      const res = await axios.post("doctor/postdoctor", {...data,d_profile:imgUrl});
+      const res = await axios.post("doctor/postdoctor", {
+        ...data,
+        d_profile: imgUrl,
+      });
       const { message } = res.data;
       console.log(message);
       setLoading(false);
@@ -166,6 +173,17 @@ const AddoctorPopup = ({ state }) => {
             onChange={handleChange}
             value={data.d_address}
           />
+
+          {/* <TextField
+            id="outlined-basic"
+            label="Doctor License Number"
+            variant="outlined"
+            fullWidth
+            name="d_id"
+            onChange={handleChange}
+            value={data.d_id}
+          /> */}
+
           <TextField
             id="outlined-basic"
             label="Contact"
