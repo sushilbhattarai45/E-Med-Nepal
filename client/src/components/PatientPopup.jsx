@@ -6,9 +6,22 @@ import instance from "../config/axios.js";
 
 const PatientPopup = ({ state }) => {
   const { popup, setPopup } = state;
-
+  const [id, setId] = useState("");
+  const [pass, setPass] = useState("");
   const close = () => {
     setPopup({ ...popup, patient: !popup.patient });
+  };
+
+  const login = async () => {
+    const login = await instance.post("/patient/login", {
+      p_mid: id,
+      p_password: pass,
+    });
+    if (login.data.statuscode == 200) {
+      alert("right");
+    } else {
+      alert("wrong");
+    }
   };
 
   return (
@@ -19,8 +32,20 @@ const PatientPopup = ({ state }) => {
         style={{ width: "min(500px,90%)" }}
       >
         <div className={styles.login_con}>
-          <TextField label={"Medical Id"} fullWidth />
-          <TextField label={"Password"} fullwidth />
+          <TextField
+            label={"Medical Id"}
+            fullWidth
+            onChange={(value) => {
+              setId(value.target.value);
+            }}
+          />
+          <TextField
+            label={"Password"}
+            fullwidth
+            onChange={(value) => {
+              setPass(value.target.value);
+            }}
+          />
           <div className={styles.btn_con}>
             <Button
               variant="contained"
@@ -33,7 +58,13 @@ const PatientPopup = ({ state }) => {
             >
               Cancel
             </Button>
-            <Button variant="contained" color="primary" fullWidth size="large">
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              size="large"
+              onClick={login}
+            >
               Login
             </Button>
           </div>
