@@ -44,7 +44,7 @@ export const login = async (req, res) => {
     });
 
     if (!exists || exists.length == 0) {
-      return res.status(400).json({ message: "Wrong Credentials" });
+      return res.status(500).json({ message: "Wrong Credentials" });
     } else {
       return res
         .status(200)
