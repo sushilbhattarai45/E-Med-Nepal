@@ -10,6 +10,8 @@ import { AiOutlinePlus, AiFillCamera } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import { MdCancel } from "react-icons/md";
 import axios from "../config/axios";
+import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const SeverityLabels = ["High", "Medium", "Low"];
 const Departments = [
@@ -22,6 +24,7 @@ const Departments = [
 ];
 
 const PostReport = () => {
+  const {id} = useParams();
   const [formValues, setFormValues] = React.useState([
     { medicine: "", time: "", duration: "" },
   ]);
@@ -41,7 +44,7 @@ const PostReport = () => {
     r_severity: "",
     r_description: "",
     r_prescription: [{}],
-    r_severity:[],
+    r_severity:"",
     r_report:[{}],
     r_doctorname:"",
     r_bloodgroup:"",
@@ -94,7 +97,6 @@ const PostReport = () => {
     const data = await axios.post("/hospital/getAllDoctors", {
       d_hid: htoken,
     });
-    console.log(data.data.data);
     if (data.data.data) {
       setDoctorList(data.data.data);
     }
@@ -104,9 +106,58 @@ const PostReport = () => {
   }, []);
 
   const uploadReport = async () => {
-    // validate the all the fields of report and send the data to the backend
+    //check the report fields are filled or not
+    if (
+      reportData.r_department === "" ||
+      reportData.r_severity === "" ||
+      reportData.r_description === "" ||
+      reportData.r_prescription.length === 0 ||
+      reportData.r_report.length === 0 ||
+      reportData.r_doctorname === "" ||
+      reportData.r_bloodgroup === "" ||
+      reportData.hm_hid === "" ||
+      reportData.hm_name === "" ||
+      reportData.p_mid === "" ||
+      reportData.d_id === ""
+    ) {
+      toast.error("Please fill all the fields");
+      return;
+    }
+    //check the prescription fields are filled or not
+    for (let i = 0; i < reportData.r_prescription.length; i++) {
+      if (
+        reportData.r_prescription[i].medicine === "" ||
+        reportData.r_prescription[i].time === "" ||
+        reportData.r_prescription[i].duration === ""
+      ) {
+        toast.error("Please fill all the prescription fields");
+        return;
+      }
+    }
+
+    //check the report fields are filled or not
+    for (let i = 0; i < reportData.r_report.length; i++) {
+      if (reportData.r_report[i].name === "" || reportData.r_report[i].photo === "") {
+        toast.error("Please fill all the report fields");
+        return;
+      }
+    }
+
+    setReportData({...reportData, p_mid:id,
+      hm_hid:htoken,
+      r_prescription:formValues,
+      r_report:reports,
+      d_id:doctorList[0].d_id,
+      r_doctorname:doctorList[0].d_name,
+
+
+
+      
+    })
+    const res = await axios.post("/report/addReport", reportData);
     
   }
+  console.log(reportData);
   return (
     <div className={styles.container}>
       <div className={styles.title}>Post Report</div>
@@ -127,6 +178,11 @@ const PostReport = () => {
             select
             label="Department"
             //   sx={{ width: "40%" }}
+            value={reportData.r_department}
+            onChange={(e) => {
+              setReportData({ ...reportData, r_department: e.target.value });
+            }}
+
           >
             {Departments.map((option) => (
               <MenuItem key={option} value={option}>
@@ -145,6 +201,14 @@ const PostReport = () => {
                   value: doc.d_name,
                 })),
               ]}
+              onChange={(e, value) => {
+                setReportData({ 
+                  ...reportData,
+                  r_doctorname: value?.value,
+                  d_id: value?.id,
+                });
+              }}
+              value={reportData.r_doctorname}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -159,6 +223,10 @@ const PostReport = () => {
             id="outlined-select-currency"
             select
             label="Patient Severity"
+            value={reportData.r_severity}
+            onChange={(e) => {
+              setReportData({ ...reportData, r_severity: e.target.value });
+            }}
             //   style={{ width: "15%" }}
           >
             {SeverityLabels.map((option) => (
@@ -174,6 +242,11 @@ const PostReport = () => {
             multiline
             rows={4}
             style={{ width: "48%" }}
+            value={reportData.r_description}
+            onChange={(e) => {
+              setReportData({ ...reportData, r_description: e.target.value });
+            }}
+
           />
           <TextField
             id="outlined-multiline-static"
@@ -181,6 +254,11 @@ const PostReport = () => {
             multiline
             rows={4}
             style={{ width: "48%" }}
+            value={reportData.r_symptoms}
+            onChange={(e) => {
+              const symptoms = e.target.value.split(",");
+              setReportData({ ...reportData, r_symptoms: symptoms });
+            }}
           />
           <div
             style={{

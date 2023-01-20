@@ -4,7 +4,7 @@ import ReportComponent from "../components/ReportComponent";
 import styles from "../css/pages/Patient.module.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "../config/axios.js";
-import { useParams } from "react-router-dom";
+import { useParams,NavLink } from "react-router-dom";
 
 const Patient = () => {
   const [currentmedicine, setCurrentMedicine] = React.useState();
