@@ -19,13 +19,13 @@ const Hero = () => {
         <div className={styles.left_side}>
           <div className={styles.hero_text}>
             <h1>
-              Introducing <span className={styles.name}>App Name</span>
+              Introducing <span className={styles.name}>UN Health system</span>
             </h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
-              obcaecati ad dolorem, voluptatem dolorum maxime consectetur
-              impedit sapiente excepturi consequatur nulla, asperiores saepe
-              omnis
+              Unified Health System is a platform which helps to centralize the
+              medical reports of a patient which can only be accessible by
+              Hospital which will further give clarity to the doctors about the
+              existing medical history of the patient.
             </p>
           </div>
           <div className={styles.btn_con}>
@@ -51,6 +51,16 @@ const Hero = () => {
         </div>
         <div className={styles.box2}>
           <HiDocumentSearch />
+        </div>
+      </div>
+      <div className={styles.footer}>
+        <div className={styles.right}>
+          <span>
+            Made with <span className={styles.heart}>❤</span> by Team Haskmukh
+          </span>
+        </div>
+        <div className={styles.left}>
+          <span>Copyright © 2023 Team Haskmukh. All rights reserved.</span>
         </div>
       </div>
     </>
