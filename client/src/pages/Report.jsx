@@ -2,17 +2,18 @@ import React from "react";
 import styles from "../css/pages/Report.module.css";
 import { BiArrowBack } from "react-icons/bi";
 import PrescriptionDisplay from "../components/PrescriptionDisplay";
-import ReportComponent from "../components/ReportComponent";
 
 const symptoms = [1, 2, 3];
 const images = [1, 2, 3, 4, 5, 6, 7];
 import instance from "../config/axios.js";
+import { useParams } from "react-router-dom";
 
 const Report = () => {
+  const { rid, pid } = useParams();
   React.useEffect(() => {
     const getCurrentPrescriptions = async () => {
       const data = await instance.post("/report/getcurrentprescription", {
-        p_mid: "9893586891",
+        p_mid: pid,
       });
 
       setCurrentMedicine(data.data.data);
@@ -20,7 +21,7 @@ const Report = () => {
 
     const getReportData = async () => {
       const data = await instance.post("report/getone", {
-        r_id: "2498992348",
+        r_id: rid,
       });
 
       setRdata(data.data.data[0]);
@@ -29,7 +30,7 @@ const Report = () => {
     getReportData();
     getCurrentPrescriptions();
     console.log(rdata);
-  });
+  }, []);
   const [currentmedicine, setCurrentMedicine] = React.useState();
 
   const [rdata, setRdata] = React.useState();
@@ -80,7 +81,7 @@ const Report = () => {
               return (
                 <div>
                   <img className={styles.img} src={item.photo} />
-                  <div className={styles.imageText}>Xray</div>
+                  <div className={styles.imageText}>{item.name}</div>
                 </div>
               );
             })}

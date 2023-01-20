@@ -1,4 +1,5 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect } from "react";
+import axios from "../config/axios.js"
 export const ContextProvider = createContext();
 
 const Context = ({ children }) => {

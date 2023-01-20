@@ -20,20 +20,20 @@ const Patient = () => {
   },[id]);
   const getPatientData = async () => {
     const data = await axios.post("/patient/getonepatient", {
-      p_mid: "9893586891",
+      p_mid: id,
     });
     setPdata(data.data.data[0]);
   };
   const getCurrentPrescriptions = async () => {
     const data = await axios.post("/report/getcurrentprescription", {
-      p_mid: "9893586891",
+      p_mid: id,
     });
     setCurrentMedicine(data.data.data);
   };
 
   const getMedicalData = async () => {
     const data = await axios.post("/report/getreportofone", {
-      p_mid: "9893586891",
+      p_mid: id,
     });
     setPMedicaldata(data.data.data);
   };
@@ -52,7 +52,7 @@ const Patient = () => {
           <div className={styles.profileContent}>
             <div>
               <div className={styles.patient_name}>{pdata?.p_name}</div>
-              <div className={styles.age}>12years old</div>
+              <div className={styles.age}>12 years old</div>
             </div>
             <div className={styles.phoneno}>Contact: {pdata?.p_contact}</div>
             <div className={styles.address}>Address: {pdata?.p_address}</div>

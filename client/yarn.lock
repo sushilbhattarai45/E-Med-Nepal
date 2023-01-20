@@ -1131,7 +1131,11 @@ react-dom@^18.2.0:
 
 react-hot-toast@^2.4.0:
   version "2.4.0"
+<<<<<<< HEAD
   resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.4.0.tgz#b91e7a4c1b6e3068fc599d3d83b4fb48668ae51d"
+=======
+  resolved "https://registry.npmjs.org/react-hot-toast/-/react-hot-toast-2.4.0.tgz"
+>>>>>>> 57af085bd3265ea9b3d8a1b059d1467dda295001
   integrity sha512-qnnVbXropKuwUpriVVosgo8QrB+IaPJCpL8oBI6Ov84uvHZ5QQcTp2qg6ku2wNfgJl6rlQXJIQU5q+5lmPOutA==
   dependencies:
     goober "^2.1.10"

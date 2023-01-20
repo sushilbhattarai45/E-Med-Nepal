@@ -85,8 +85,18 @@ h2 {
   /* justify-content: space-between; */
 }
 
-.severity_indicator {
+.severity_indicator_high {
   height: 1rem;
   background-color: red;
+  border-radius: 0 0 16px 16px;
+}
+.severity_indicator_mid {
+  height: 1rem;
+  background-color: yellow;
+  border-radius: 0 0 16px 16px;
+}
+.severity_indicator_low {
+  height: 1rem;
+  background-color: green;
   border-radius: 0 0 16px 16px;
 }
