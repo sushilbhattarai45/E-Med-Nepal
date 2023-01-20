@@ -26,6 +26,8 @@ export const postReport = async (req, res) => {
     time: moment().format("LT"),
   };
   try {
+    console.log(req.body);
+
     const report = new reportSchema({
       p_mid,
       r_id,
