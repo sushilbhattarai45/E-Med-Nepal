@@ -3,13 +3,18 @@ import styles from "../css/pages/Hero.module.css";
 import { TbReportMedical } from "react-icons/tb";
 import { HiDocumentSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import PatientPopup from "../components/PatientPopup";
+import DoctorPopup from "../components/DoctorPopup";
 const Hero = () => {
   const [search, setSearch] = useState("");
+  const [popup, setPopup] = useState({ patient: false, doctor: false });
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
   return (
     <>
+      {popup.patient && <PatientPopup state={{ popup, setPopup }} />}
+      {popup.doctor && <DoctorPopup state={{ popup, setPopup }} />}
       <div className={styles.hero_container}>
         <div className={styles.left_side}>
           <div className={styles.hero_text}>
@@ -24,10 +29,16 @@ const Hero = () => {
             </p>
           </div>
           <div className={styles.btn_con}>
-            <div className={styles.login1_btn}>
+            <div
+              className={styles.login1_btn}
+              onClick={() => setPopup({ ...popup, patient: true })}
+            >
               Login as Patient
             </div>
-            <div className={styles.login2_btn}>
+            <div
+              className={styles.login2_btn}
+              onClick={() => setPopup({ ...popup, doctor: true })}
+            >
               Login as Doctor
             </div>
           </div>

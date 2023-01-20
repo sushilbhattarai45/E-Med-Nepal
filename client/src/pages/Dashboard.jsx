@@ -7,11 +7,10 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
-  Typography,
 } from "@mui/material";
 import { MdDelete } from "react-icons/md";
+import AddoctorPopup from "../components/AddoctorPopup";
 import instance from "../config/axios.js";
 
 const Dashboard = () => {
@@ -24,12 +23,13 @@ const Dashboard = () => {
       setDoctor(data.data.data);
     };
     getDoctors();
-    console.log(doctor);
-  });
+  },[]);
+  
   const deleteDoctor = async (d_id) => {
     const data = await instance.post("/doctor/delete", {
       d_id: d_id,
     });
+    window.location.reload();
   };
   const [doctor, setDoctor] = React.useState([{}]);
 
@@ -123,12 +123,15 @@ const Dashboard = () => {
   //     gender: "Female",
   //   },
   // ];
+
+  const [popup, setPopup] = React.useState(false);
   return (
     <>
+    {popup && <AddoctorPopup state={{popup,setPopup}}/>}
       <div className={styles.doctors_con}>
         <div className={styles.doctors_top}>
           <p className={styles.title}>Doctors</p>
-          <div className={styles.add_btn}>
+          <div className={styles.add_btn} onClick={() =>setPopup(!popup)}>
             <p className={styles.add_text}>Add Doctor</p>
             <AiOutlinePlus className={styles.add_plus} />
           </div>
@@ -156,6 +159,7 @@ const Dashboard = () => {
               </TableHead>
               <TableBody>
                 {doctor.map((row, i) => {
+                  console.log(row);
                   return (
                     <TableRow hover tabIndex={-1} key={i}>
                       <TableCell

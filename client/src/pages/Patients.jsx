@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../css/pages/Patients.module.css";
 import { BsSearch } from "react-icons/bs";
 import {
@@ -11,16 +11,16 @@ import {
 } from "@mui/material";
 import instance from "../config/axios.js";
 const Patients = () => {
+  const [data, setData] = React.useState([{}]);
   const getRecentPatients = async () => {
-    console.log("okkkk");
     const patientdata = await instance.post("/hospital/getrecentpatient", {
       hm_hid: "12345",
     });
-    await setData(patientdata.data.data);
+    setData(patientdata.data.data);
   };
-  const [data, setData] = React.useState([{}]);
-  getRecentPatients();
-  console.log("ok" + data);
+  useEffect(() => {
+    getRecentPatients();
+  }, []);
   const columns = [
     {
       id: "sn",
