@@ -11,7 +11,6 @@ import { LoadingButton } from "@mui/lab";
 const AddoctorPopup = ({ state }) => {
   const { popup, setPopup } = state;
   const [pic, setPic] = React.useState("");
-  const [file, setFile] = React.useState(null);
   const [imgUrl, setImgUrl] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState({
@@ -79,11 +78,10 @@ const AddoctorPopup = ({ state }) => {
   const getImg = (e) => {
     const [file] = e.target.files;
     setPic(URL.createObjectURL(file));
-    setFile(file);
-    getImgUrl();
+    getImgUrl(file);
   };
 
-  const getImgUrl = async () => {
+  const getImgUrl = async (file) => {
     const formData = new FormData();
     formData.append("pic", file);
     const res = await axios.post("report/web/upload", formData, {
