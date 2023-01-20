@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
 import Autocomplete from "@mui/material/Autocomplete";
-
 import { AiOutlinePlus, AiFillCamera } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import { MdCancel } from "react-icons/md";
@@ -33,6 +32,22 @@ const PostReport = () => {
   const [pic, setPic] = React.useState();
   const [imgUrl, setImgUrl] = React.useState();
   const [doctorList, setDoctorList] = React.useState([]);
+  const htoken = localStorage.getItem("htoken");
+
+  const [reportData, setReportData] = React.useState({
+    p_mid:"",
+    r_department: "",
+    d_id:"",
+    r_severity: "",
+    r_description: "",
+    r_prescription: [{}],
+    r_severity:[],
+    r_report:[{}],
+    r_doctorname:"",
+    r_bloodgroup:"",
+    hm_hid:"",
+    hm_name:"",
+  });
 
   let addFormFields = () => {
     setFormValues([...formValues, { medicine: "", time: "", duration: "" }]);
@@ -77,7 +92,7 @@ const PostReport = () => {
 
   const getDoctors = async () => {
     const data = await axios.post("/hospital/getAllDoctors", {
-      d_hid: "12345",
+      d_hid: htoken,
     });
     console.log(data.data.data);
     if (data.data.data) {
@@ -87,6 +102,11 @@ const PostReport = () => {
   React.useEffect(() => {
     getDoctors();
   }, []);
+
+  const uploadReport = async () => {
+    // validate the all the fields of report and send the data to the backend
+    
+  }
   return (
     <div className={styles.container}>
       <div className={styles.title}>Post Report</div>
@@ -312,7 +332,8 @@ const PostReport = () => {
           variant="contained"
           component="label"
           style={{ marginTop: 24, width: "100%" }}
-          onClick={() => {}}
+          onClick={() => uploadReport()}
+          size="large"
         >
           Upload Report
         </Button>

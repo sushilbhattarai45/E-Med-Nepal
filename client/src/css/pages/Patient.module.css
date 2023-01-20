@@ -34,6 +34,7 @@
   font-size: 1.2rem;
   cursor: pointer;
   transition: 0.4s;
+  text-decoration: none;
   gap: 6px;
 }
 .add_report_icon {

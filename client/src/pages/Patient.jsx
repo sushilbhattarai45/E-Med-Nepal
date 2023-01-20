@@ -3,7 +3,6 @@ import PrescriptionDisplay from "../components/PrescriptionDisplay";
 import ReportComponent from "../components/ReportComponent";
 import styles from "../css/pages/Patient.module.css";
 import { AiOutlinePlus } from "react-icons/ai";
-import ReportEntryPopup from "../components/ReportEntryPopup";
 import axios from "../config/axios.js";
 import { useParams } from "react-router-dom";
 
@@ -11,7 +10,6 @@ const Patient = () => {
   const [currentmedicine, setCurrentMedicine] = React.useState();
   const [pdata, setPdata] = React.useState();
   const [pmedicaldata, setPMedicaldata] = React.useState();
-  const [popup, setPopup] = React.useState(false);
   const htoken = localStorage.getItem("htoken");
   const { id } = useParams();
   React.useEffect(() => {
@@ -39,9 +37,10 @@ const Patient = () => {
     setPMedicaldata(data.data.data);
   };
 
+  const reportPostUrl = `/app/reportpost/${id}`;
+
   return (
     <>
-      {popup && <ReportEntryPopup state={{ setPopup, popup }} />}
       <div className={styles.container}>
         <div className={styles.title}>Patient</div>
         <div className={styles.row}>
@@ -71,13 +70,10 @@ const Patient = () => {
           <div className={styles.top}>
             <div className={styles.reportTitle}>Reports</div>
             {htoken && (
-              <div
-                className={styles.add_report}
-                onClick={() => setPopup(!popup)}
-              >
+              <NavLink to={reportPostUrl} className={styles.add_report}>
                 <AiOutlinePlus className={styles.add_report_icon} />
                 <p className={styles.add_report_btn}>Add Report</p>
-              </div>
+              </NavLink>
             )}
           </div>
           <div className={styles.reports}>
