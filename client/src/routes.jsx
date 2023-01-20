@@ -37,17 +37,16 @@ export default function Router() {
           element: <Patients />,
         },
         {
-            path:"patient/:id",
-            element:<Patient/>
+          path: "patient/:id",
+          element: <Patient />,
         },
         {
-            path:"report/:id",
-            element:<Report/>
+          path: "report/:rid/:pid",
+          element: <Report />,
         },
         {
-          path:"reportpost/:id"
-        }
-
+          path: "reportpost/:id",
+        },
       ],
     },
   ]);

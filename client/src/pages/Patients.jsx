@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@mui/material";
 import instance from "../config/axios.js";
+import { NavLink } from "react-router-dom";
 const Patients = () => {
   const [data, setData] = React.useState([{}]);
   const getRecentPatients = async () => {
@@ -146,13 +147,35 @@ const Patients = () => {
                         style={{ fontFamily: "Poppins" }}
                       >
                         <div className={styles.patient_pic}>
-                          <img src={row?.p_profile} className={styles.img} />
+                          <NavLink
+                            to={`../patient/${row?.p_mid}`}
+                            style={{
+                              textDecoration: "none",
+                              margin: 0,
+                            }}
+                          >
+                            {" "}
+                            <img
+                              src={row?.p_profile}
+                              className={styles.img}
+                            />{" "}
+                          </NavLink>
                         </div>
                       </TableCell>
 
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row?.p_name}
+                        <NavLink
+                          to={`../patient/${row?.p_mid}`}
+                          style={{
+                            textDecoration: "none",
+                            margin: 0,
+                          }}
+                        >
+                          {" "}
+                          {row?.p_name}
+                        </NavLink>
                       </TableCell>
+
                       <TableCell style={{ fontFamily: "Poppins" }}>
                         {row?.p_address}
                       </TableCell>

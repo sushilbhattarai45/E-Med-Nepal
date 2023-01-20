@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@mui/material";
 import instance from "../config/axios.js";
+import { NavLink } from "react-router-dom";
 const Reports = () => {
   const [data, setData] = React.useState([{}]);
 
@@ -131,10 +132,24 @@ const Reports = () => {
                         {i + 1}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.p_name}
+                        <NavLink
+                          to={"../report/" + row.r_id + "/" + row.p_mid}
+                          style={{
+                            textDecoration: "none",
+                          }}
+                        >
+                          {row.p_name}
+                        </NavLink>
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
-                        {row.r_department}
+                        <NavLink
+                          to={"../report/" + row.r_id + "/" + row.p_mid}
+                          style={{
+                            textDecoration: "none",
+                          }}
+                        >
+                          {row.r_department}
+                        </NavLink>{" "}
                       </TableCell>
                       <TableCell style={{ fontFamily: "Poppins" }}>
                         {row.r_priority === "HIGH" && (
