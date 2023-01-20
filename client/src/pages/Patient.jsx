@@ -37,7 +37,7 @@ const Patient = () => {
     setPMedicaldata(data.data.data);
   };
 
-  const reportPostUrl = `/app/reportpost/${id}`;
+  const reportPostUrl = `/app/reportpost/${id}/${pdata?.p_name}`;
 
   return (
     <>
@@ -46,7 +46,7 @@ const Patient = () => {
         <div className={styles.row}>
           <img
             className={styles.patient_image}
-            src={pdata?.p_image}
+            src="/public/assets/avatar.jpeg"
             alt="Profile Image"
           />
           <div className={styles.profileContent}>

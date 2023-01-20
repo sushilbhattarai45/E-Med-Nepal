@@ -12,7 +12,7 @@ const AddoctorPopup = ({ state }) => {
   const { popup, setPopup } = state;
   const [pic, setPic] = React.useState("");
   const { hp } = useContext(ContextProvider);
-const [hospitalData, setHospitalData] = hp;
+  const [hospitalData, setHospitalData] = hp;
   const [imgUrl, setImgUrl] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState({
@@ -20,7 +20,7 @@ const [hospitalData, setHospitalData] = hp;
     d_address: "",
     d_contact: "",
     d_id: Date.now(),
-    d_hid: hospitalData?.hm_hid,
+    d_hid: hp[0].hm_hid,
     d_dob: "",
     d_profile: "",
     d_gender: "",
@@ -102,25 +102,23 @@ const [hospitalData, setHospitalData] = hp;
 
   const handleClick = async () => {
     //check if all fields are filled
-    alert(hp.hp_id);
 
     if (
       data.d_name &&
       data.d_address &&
       data.d_contact &&
-      data.d_hid &&
       data.d_dob &&
-      data.d_id &&
       data.d_gender &&
       data.d_bg &&
-      imgUrl &&
       data.d_specialization
     ) {
       setLoading(true);
       const res = await axios.post("doctor/postdoctor", {
         ...data,
         d_profile: imgUrl,
+        d_id: `${Date.now()}`,
       });
+      console.log(res.data);
       const { message } = res.data;
       console.log(message);
       setLoading(false);
@@ -173,17 +171,6 @@ const [hospitalData, setHospitalData] = hp;
             onChange={handleChange}
             value={data.d_address}
           />
-
-          {/* <TextField
-            id="outlined-basic"
-            label="Doctor License Number"
-            variant="outlined"
-            fullWidth
-            name="d_id"
-            onChange={handleChange}
-            value={data.d_id}
-          /> */}
-
           <TextField
             id="outlined-basic"
             label="Contact"

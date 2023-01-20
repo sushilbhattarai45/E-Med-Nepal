@@ -25,7 +25,7 @@ const Departments = [
 ];
 
 const PostReport = () => {
-  const { id } = useParams();
+  const { id, name } = useParams();
   const [formValues, setFormValues] = React.useState([
     { medicine: "", time: "", duration: "" },
   ]);
@@ -42,12 +42,13 @@ const PostReport = () => {
 
   const [reportData, setReportData] = React.useState({
     p_mid: "",
+    p_name: name,
     r_department: "",
     d_id: "",
     r_description: "",
     r_prescription: [{}],
     r_severity: "",
-    r_report: [{}],
+    r_reports: [],
     r_doctorname: "",
     r_bloodgroup: "",
     hm_id: "",
@@ -57,14 +58,19 @@ const PostReport = () => {
   let addFormFields = () => {
     //check the all element is not empty or not
     let isAllFieldFilled = reportData.r_prescription.every((item) => {
-      return item.medicine !== "" && item.time !== "" && item.duration !== "";
+      return (
+        item.medicine !== "" && item.interval !== "" && item.duration !== ""
+      );
     });
     if (!isAllFieldFilled) {
       toast.error("Please fill all the fields");
       return;
     }
 
-    setFormValues([...formValues, { medicine: "", time: "", duration: "" }]);
+    setFormValues([
+      ...formValues,
+      { medicine: "", interval: "", duration: "" },
+    ]);
   };
 
   let removeFormFields = (i) => {
@@ -97,7 +103,7 @@ const PostReport = () => {
     if (data?.name?.trim() !== "" && data.photo) {
       setReportData((prev) => ({
         ...prev,
-        r_report: [...prev.r_report, data],
+        r_reports: [...prev.r_reports, data],
       }));
       // setReports((prev) => [...prev, data]);
       setImgText("");
@@ -148,8 +154,6 @@ const PostReport = () => {
       ...reportData,
       p_mid: id,
       hm_id: htoken,
-      // r_prescription: formValues,
-      // r_report: reports,
       d_id: doctorList[0].d_id,
       r_doctorname: doctorList[0].d_name,
       hm_name: hospitalData.hm_name,
@@ -157,28 +161,20 @@ const PostReport = () => {
 
     try {
       // console.log(reportData);
-      const res = await axios.post(
-        "/report/postreport",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-        { ...reportData }
-        // {
-        //   p_mid: id,
-        //   hm_id: htoken,
-        //   r_prescription: formValues,
-        //   r_report: reports,
-        //   d_id: doctorList[0].d_id,
-        //   r_doctorname: doctorList[0].d_name,
-        //   hm_name: hospitalData.hm_name,
-        //   r_department: reportData.r_department,
-        //   r_description: reportData.r_description,
-        //   r_severity: reportData.r_severity,
-        //   r_symptoms: reportData.r_symptoms,
-        // }
-      );
+      const res = await axios.post("/report/postreport", {
+        p_mid: id,
+        p_name: reportData.p_name,
+        hm_id: htoken,
+        r_prescription: reportData.r_prescription,
+        r_reports: reportData.r_reports,
+        d_id: doctorList[0].d_id,
+        r_doctorname: doctorList[0].d_name,
+        hm_name: hospitalData.hm_name,
+        r_department: reportData.r_department,
+        r_description: reportData.r_description,
+        r_priority: reportData.r_severity,
+        r_symptoms: reportData.r_symptoms,
+      });
       if (res) {
         console.log(reportData);
         console.log(res.data);
@@ -306,8 +302,12 @@ const PostReport = () => {
                 <TextField
                   onChange={(e) => {
                     const values = [...reportData.r_prescription];
+                    console.log(values);
+                    if (!values[index])
+                      values.push({ medicine: "", interval: "", duration: "" });
                     values[index].medicine = e.target.value;
                     setReportData({ ...reportData, r_prescription: values });
+                    console.log(reportData.r_prescription[index]);
                   }}
                   id="outlined-select-currency"
                   label="Medicine Name"
@@ -317,8 +317,11 @@ const PostReport = () => {
                 <TextField
                   onChange={(e) => {
                     const values = [...reportData.r_prescription];
-                    values[index].time = e.target.value;
+                    if (!values[index])
+                      values.push({ medicine: "", interval: "", duration: "" });
+                    values[index].interval = e.target.value;
                     setReportData({ ...reportData, r_prescription: values });
+                    console.log(reportData.r_prescription[index]);
                   }}
                   id="outlined-select-currency"
                   label="Interval/Note"
@@ -328,8 +331,11 @@ const PostReport = () => {
                 <TextField
                   onChange={(e) => {
                     const values = [...reportData.r_prescription];
+                    if (!values[index])
+                      values.push({ medicine: "", interval: "", duration: "" });
                     values[index].duration = e.target.value;
                     setReportData({ ...reportData, r_prescription: values });
+                    console.log(reportData.r_prescription[index]);
                   }}
                   id="outlined-select-currency"
                   label="Duration"
@@ -428,8 +434,8 @@ const PostReport = () => {
         </div>
 
         <div className={styles.reports}>
-          {reportData.r_report.length > 0 &&
-            reportData.r_report?.map((report, index) => {
+          {reportData.r_reports.length > 0 &&
+            reportData.r_reports?.map((report, index) => {
               // console.log(index);
               return (
                 <div key={`image-${index}`} style={{ position: "relative" }}>
@@ -439,7 +445,7 @@ const PostReport = () => {
                     onClick={() => {
                       setReportData({
                         ...reportData,
-                        r_report: reportData.r_report.filter(
+                        r_report: reportData.r_reports.filter(
                           (fruit, i) => i !== index
                         ),
                       });

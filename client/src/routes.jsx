@@ -46,7 +46,7 @@ export default function Router() {
           element: <Report />,
         },
         {
-          path: "reportpost/:id",
+          path: "reportpost/:id?/:name?",
           element: <PostReport />,
         },
       ],

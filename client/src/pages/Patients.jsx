@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import { ContextProvider } from "../config/Context";
 const Patients = () => {
   const [data, setData] = React.useState([{}]);
-  const {hp} = React.useContext(ContextProvider);
+  const { hp } = React.useContext(ContextProvider);
   const [hospitalData, setHospitalData] = hp;
   const getRecentPatients = async () => {
     const patientdata = await instance.post("/hospital/getrecentpatient", {
@@ -157,7 +157,10 @@ const Patients = () => {
                               margin: 0,
                             }}
                           >
-                            <img src={row?.p_profile} className={styles.img} />{" "}
+                            <img
+                              src="/public/assets/avatar.jpeg"
+                              className={styles.img}
+                            />{" "}
                           </NavLink>
                         </div>
                       </TableCell>
