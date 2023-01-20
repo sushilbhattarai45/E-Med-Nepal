@@ -13,6 +13,7 @@ export const postdoctor = async (req, res) => {
     d_specialization,
     d_gender,
   } = req.body;
+  console.log(req.body);
   const d_toc = {
     date: moment().format("ll"),
     time: moment().format("LT"),
@@ -21,7 +22,6 @@ export const postdoctor = async (req, res) => {
     const doctor = new doctorSchema({
       d_toc,
       d_name,
-      d_status,
       d_contact,
       d_address,
       d_dob,
@@ -33,9 +33,11 @@ export const postdoctor = async (req, res) => {
       d_bg,
     });
     const data = await doctor.save();
+
     return res.json({ message: "Done", statuscode: 200, data: data });
   } catch (e) {
-    return res.json({ error: " Server side error" });
+    console.log(e);
+    return res.json({ error: " Server side error", e: e });
   }
 };
 export const getOne = async (req, res) => {

@@ -18,6 +18,7 @@ const patient = new mongoose.Schema({
   },
   p_password: {
     type: String,
+    default: "12345",
   },
   p_gender: {
     type: String,
