@@ -11,11 +11,14 @@ import {
 } from "@mui/material";
 import instance from "../config/axios.js";
 import { NavLink } from "react-router-dom";
+import { ContextProvider } from "../config/Context";
 const Patients = () => {
   const [data, setData] = React.useState([{}]);
+  const {hp} = React.useContext(ContextProvider);
+  const [hospitalData, setHospitalData] = hp;
   const getRecentPatients = async () => {
     const patientdata = await instance.post("/hospital/getrecentpatient", {
-      hm_hid: "12345",
+      hm_hid: hospitalData?.hm_hid,
     });
     setData(patientdata.data.data);
   };

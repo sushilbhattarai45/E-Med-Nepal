@@ -12,6 +12,7 @@ import { MdCancel } from "react-icons/md";
 import axios from "../config/axios";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import { ContextProvider } from "../config/Context";
 
 const SeverityLabels = ["High", "Medium", "Low"];
 const Departments = [
@@ -24,12 +25,14 @@ const Departments = [
 ];
 
 const PostReport = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [formValues, setFormValues] = React.useState([
     { medicine: "", time: "", duration: "" },
   ]);
   const [reports, setReports] = React.useState([]);
-
+  const { hp } = React.useContext(ContextProvider);
+  const [hospitalData, setHospitalData] = hp;
+  // console.log(hospitalData);
   //Image states
   const [imgText, setImgText] = React.useState();
   const [pic, setPic] = React.useState();
@@ -38,21 +41,29 @@ const PostReport = () => {
   const htoken = localStorage.getItem("htoken");
 
   const [reportData, setReportData] = React.useState({
-    p_mid:"",
+    p_mid: "",
     r_department: "",
-    d_id:"",
-    r_severity: "",
+    d_id: "",
     r_description: "",
     r_prescription: [{}],
-    r_severity:"",
-    r_report:[{}],
-    r_doctorname:"",
-    r_bloodgroup:"",
-    hm_hid:"",
-    hm_name:"",
+    r_severity: "",
+    r_report: [{}],
+    r_doctorname: "",
+    r_bloodgroup: "",
+    hm_id: "",
+    hm_name: "",
   });
 
   let addFormFields = () => {
+    //check the all element is not empty or not
+    let isAllFieldFilled = reportData.r_prescription.every((item) => {
+      return item.medicine !== "" && item.time !== "" && item.duration !== "";
+    });
+    if (!isAllFieldFilled) {
+      toast.error("Please fill all the fields");
+      return;
+    }
+
     setFormValues([...formValues, { medicine: "", time: "", duration: "" }]);
   };
 
@@ -65,7 +76,7 @@ const PostReport = () => {
   const getImg = (e) => {
     const [file] = e.target.files;
     setPic(URL.createObjectURL(file));
-    console.log(file);
+    // console.log(file);
     getImgUrl(file);
   };
   const getImgUrl = async (file) => {
@@ -77,14 +88,18 @@ const PostReport = () => {
       },
     });
     const { msg, imgUrl } = res.data;
-    console.log(res.data);
-    console.log(imgUrl);
+    // console.log(res.data);
+    // console.log(imgUrl);
     setImgUrl(imgUrl);
   };
 
   const handleReportAddition = (data) => {
     if (data?.name?.trim() !== "" && data.photo) {
-      setReports((prev) => [...prev, data]);
+      setReportData((prev) => ({
+        ...prev,
+        r_report: [...prev.r_report, data],
+      }));
+      // setReports((prev) => [...prev, data]);
       setImgText("");
       setImgUrl("");
       setPic(null);
@@ -105,59 +120,75 @@ const PostReport = () => {
     getDoctors();
   }, []);
 
+  // console.log(formValues);
   const uploadReport = async () => {
-    //check the report fields are filled or not
-    if (
-      reportData.r_department === "" ||
-      reportData.r_severity === "" ||
-      reportData.r_description === "" ||
-      reportData.r_prescription.length === 0 ||
-      reportData.r_report.length === 0 ||
-      reportData.r_doctorname === "" ||
-      reportData.r_bloodgroup === "" ||
-      reportData.hm_hid === "" ||
-      reportData.hm_name === "" ||
-      reportData.p_mid === "" ||
-      reportData.d_id === ""
-    ) {
-      toast.error("Please fill all the fields");
-      return;
-    }
-    //check the prescription fields are filled or not
-    for (let i = 0; i < reportData.r_prescription.length; i++) {
-      if (
-        reportData.r_prescription[i].medicine === "" ||
-        reportData.r_prescription[i].time === "" ||
-        reportData.r_prescription[i].duration === ""
-      ) {
-        toast.error("Please fill all the prescription fields");
-        return;
+    // //check the prescription fields are filled or not
+    // for (let i = 0; i < formValues.length; i++) {
+    //   if (
+    //     reportData.formValues[i].medicine === "" ||
+    //     reportData.formValues[i].time === "" ||
+    //     reportData.formValues[i].duration === ""
+    //   ) {
+    //     toast.error("Please fill all the prescription fields");
+    //     return;
+    //   }
+    // }
+
+    // //check the report fields are filled or not
+    // for (let i = 0; i < reportData.r_report.length; i++) {
+    //   if (
+    //     reportData.r_report[i].name === "" ||
+    //     reportData.r_report[i].photo === ""
+    //   ) {
+    //     toast.error("Please fill all the report fields");
+    //     return;
+    //   }
+    // }
+    setReportData({
+      ...reportData,
+      p_mid: id,
+      hm_id: htoken,
+      // r_prescription: formValues,
+      // r_report: reports,
+      d_id: doctorList[0].d_id,
+      r_doctorname: doctorList[0].d_name,
+      hm_name: hospitalData.hm_name,
+    });
+
+    try {
+      // console.log(reportData);
+      const res = await axios.post(
+        "/report/postreport",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+        { ...reportData }
+        // {
+        //   p_mid: id,
+        //   hm_id: htoken,
+        //   r_prescription: formValues,
+        //   r_report: reports,
+        //   d_id: doctorList[0].d_id,
+        //   r_doctorname: doctorList[0].d_name,
+        //   hm_name: hospitalData.hm_name,
+        //   r_department: reportData.r_department,
+        //   r_description: reportData.r_description,
+        //   r_severity: reportData.r_severity,
+        //   r_symptoms: reportData.r_symptoms,
+        // }
+      );
+      if (res) {
+        console.log(reportData);
+        console.log(res.data);
+        toast.success("Report added successfully");
       }
+    } catch (err) {
+      toast.error("Something went wrong");
     }
-
-    //check the report fields are filled or not
-    for (let i = 0; i < reportData.r_report.length; i++) {
-      if (reportData.r_report[i].name === "" || reportData.r_report[i].photo === "") {
-        toast.error("Please fill all the report fields");
-        return;
-      }
-    }
-
-    setReportData({...reportData, p_mid:id,
-      hm_hid:htoken,
-      r_prescription:formValues,
-      r_report:reports,
-      d_id:doctorList[0].d_id,
-      r_doctorname:doctorList[0].d_name,
-
-
-
-      
-    })
-    const res = await axios.post("/report/addReport", reportData);
-    
-  }
-  console.log(reportData);
+  };
+  // console.log(reportData);
   return (
     <div className={styles.container}>
       <div className={styles.title}>Post Report</div>
@@ -182,7 +213,6 @@ const PostReport = () => {
             onChange={(e) => {
               setReportData({ ...reportData, r_department: e.target.value });
             }}
-
           >
             {Departments.map((option) => (
               <MenuItem key={option} value={option}>
@@ -202,7 +232,7 @@ const PostReport = () => {
                 })),
               ]}
               onChange={(e, value) => {
-                setReportData({ 
+                setReportData({
                   ...reportData,
                   r_doctorname: value?.value,
                   d_id: value?.id,
@@ -246,7 +276,6 @@ const PostReport = () => {
             onChange={(e) => {
               setReportData({ ...reportData, r_description: e.target.value });
             }}
-
           />
           <TextField
             id="outlined-multiline-static"
@@ -275,18 +304,33 @@ const PostReport = () => {
             return (
               <div className={styles.medicine_con}>
                 <TextField
+                  onChange={(e) => {
+                    const values = [...reportData.r_prescription];
+                    values[index].medicine = e.target.value;
+                    setReportData({ ...reportData, r_prescription: values });
+                  }}
                   id="outlined-select-currency"
                   label="Medicine Name"
                   style={{ width: "38%" }}
                 />
                 {/*  */}
                 <TextField
+                  onChange={(e) => {
+                    const values = [...reportData.r_prescription];
+                    values[index].time = e.target.value;
+                    setReportData({ ...reportData, r_prescription: values });
+                  }}
                   id="outlined-select-currency"
                   label="Interval/Note"
                   style={{ width: "38%" }}
                 />
                 {/*  */}
                 <TextField
+                  onChange={(e) => {
+                    const values = [...reportData.r_prescription];
+                    values[index].duration = e.target.value;
+                    setReportData({ ...reportData, r_prescription: values });
+                  }}
                   id="outlined-select-currency"
                   label="Duration"
                   type={"number"}
@@ -384,17 +428,20 @@ const PostReport = () => {
         </div>
 
         <div className={styles.reports}>
-          {reports.length > 0 &&
-            reports?.map((report, index) => {
-              console.log(index);
+          {reportData.r_report.length > 0 &&
+            reportData.r_report?.map((report, index) => {
+              // console.log(index);
               return (
                 <div key={`image-${index}`} style={{ position: "relative" }}>
                   <RxCross2
                     style={{ position: "absolute", right: 0 }}
                     size={24}
                     onClick={() => {
-                      setReports((oldValues) => {
-                        return oldValues.filter((fruit, i) => i !== index);
+                      setReportData({
+                        ...reportData,
+                        r_report: reportData.r_report.filter(
+                          (fruit, i) => i !== index
+                        ),
                       });
                     }}
                     color="#fff"
