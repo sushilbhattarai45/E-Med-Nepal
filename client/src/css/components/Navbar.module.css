@@ -19,6 +19,12 @@
   height: 40px;
   border-radius: 7px;
   background-color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary);
+  font-size: 1.5rem;
+
 }
 .logo_name {
   font-size: 1.7rem;
