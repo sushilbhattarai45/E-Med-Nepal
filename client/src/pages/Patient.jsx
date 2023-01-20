@@ -12,12 +12,13 @@ const Patient = () => {
   const [pdata, setPdata] = React.useState();
   const [pmedicaldata, setPMedicaldata] = React.useState();
   const [popup, setPopup] = React.useState(false);
-  const {id} = useParams();
+  const htoken = localStorage.getItem("htoken");
+  const { id } = useParams();
   React.useEffect(() => {
     getPatientData();
     getMedicalData();
     getCurrentPrescriptions();
-  },[id]);
+  }, [id]);
   const getPatientData = async () => {
     const data = await axios.post("/patient/getonepatient", {
       p_mid: id,
@@ -69,10 +70,15 @@ const Patient = () => {
         <div style={{ marginTop: 60 }}>
           <div className={styles.top}>
             <div className={styles.reportTitle}>Reports</div>
-            <div className={styles.add_report} onClick={() => setPopup(!popup)}>
-              <AiOutlinePlus className={styles.add_report_icon} />
-              <p className={styles.add_report_btn}>Add Report</p>
-            </div>
+            {htoken && (
+              <div
+                className={styles.add_report}
+                onClick={() => setPopup(!popup)}
+              >
+                <AiOutlinePlus className={styles.add_report_icon} />
+                <p className={styles.add_report_btn}>Add Report</p>
+              </div>
+            )}
           </div>
           <div className={styles.reports}>
             {pmedicaldata?.map((data) => {
