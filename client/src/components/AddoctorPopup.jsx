@@ -85,8 +85,8 @@ const AddoctorPopup = ({ state }) => {
     const formData = new FormData();
     formData.append("pic", file);
     const res = await axios.post("report/web/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+      headersContent: {
+        "-Type": "multipart/form-data",
       },
     });
     const { msg, imgUrl } = res.data;

@@ -1,10 +1,8 @@
 import moment from "moment";
 import doctorSchema from "../models/doctorsModel.js";
 export const postdoctor = async (req, res) => {
-  console.log(req.body);
   const {
     d_name,
-    d_status,
     d_contact,
     d_address,
     d_id,
@@ -15,9 +13,6 @@ export const postdoctor = async (req, res) => {
     d_specialization,
     d_gender,
   } = req.body;
-  //   const d_mid = Math.floor(
-  //     1000000000 + Math.random() * (9999999999 - 1000000000 + 1)
-  //   );
   const d_toc = {
     date: moment().format("ll"),
     time: moment().format("LT"),
@@ -35,9 +30,8 @@ export const postdoctor = async (req, res) => {
       d_id,
       d_hid,
       d_gender,
+      d_bg,
     });
-    console.log("ok" + doctor);
-
     const data = await doctor.save();
     return res.json({ message: "Done", statuscode: 200, data: data });
   } catch (e) {

@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../css/components/ReportComponent.module.css";
 const symptoms = [1, 2, 3];
 export default function ReportComponent({ data }) {
-  console.log(data);
   return (
     <div className={styles.outsideContainer}>
       <div className={styles.container}>

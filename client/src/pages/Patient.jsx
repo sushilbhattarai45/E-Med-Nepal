@@ -4,41 +4,40 @@ import ReportComponent from "../components/ReportComponent";
 import styles from "../css/pages/Patient.module.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import ReportEntryPopup from "../components/ReportEntryPopup";
-import instance from "../config/axios.js";
+import axios from "../config/axios.js";
+import { useParams } from "react-router-dom";
 
 const Patient = () => {
-  React.useEffect(() => {
-    const getPatientData = async () => {
-      const data = await instance.post("/patient/getonepatient", {
-        p_mid: "9893586891",
-      });
-
-      setPdata(data.data.data[0]);
-    };
-    const getCurrentPrescriptions = async () => {
-      const data = await instance.post("/report/getcurrentprescription", {
-        p_mid: "9893586891",
-      });
-
-      setCurrentMedicine(data.data.data);
-    };
-
-    const getMedicalData = async () => {
-      const data = await instance.post("/report/getreportofone", {
-        p_mid: "9893586891",
-      });
-      setPMedicaldata(data.data.data);
-    };
-    getPatientData();
-    getMedicalData();
-    getCurrentPrescriptions();
-  });
-
   const [currentmedicine, setCurrentMedicine] = React.useState();
   const [pdata, setPdata] = React.useState();
   const [pmedicaldata, setPMedicaldata] = React.useState();
-
   const [popup, setPopup] = React.useState(false);
+  const {id} = useParams();
+  React.useEffect(() => {
+    getPatientData();
+    getMedicalData();
+    getCurrentPrescriptions();
+  },[id]);
+  const getPatientData = async () => {
+    const data = await axios.post("/patient/getonepatient", {
+      p_mid: "9893586891",
+    });
+    setPdata(data.data.data[0]);
+  };
+  const getCurrentPrescriptions = async () => {
+    const data = await axios.post("/report/getcurrentprescription", {
+      p_mid: "9893586891",
+    });
+    setCurrentMedicine(data.data.data);
+  };
+
+  const getMedicalData = async () => {
+    const data = await axios.post("/report/getreportofone", {
+      p_mid: "9893586891",
+    });
+    setPMedicaldata(data.data.data);
+  };
+
   return (
     <>
       {popup && <ReportEntryPopup state={{ setPopup, popup }} />}

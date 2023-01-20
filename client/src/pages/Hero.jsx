@@ -39,7 +39,7 @@ const Hero = () => {
               className={styles.login2_btn}
               onClick={() => setPopup({ ...popup, doctor: true })}
             >
-              Login as Doctor
+              Login as Hospital
             </div>
           </div>
         </div>

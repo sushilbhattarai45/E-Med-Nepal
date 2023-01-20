@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Popup from "./Popup";
 import styles from "../css/components/PatientPopup.module.css";
 import { Button, TextField } from "@mui/material";
 import instance from "../config/axios.js";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { ContextProvider } from "../config/Context";
 
 const PatientPopup = ({ state }) => {
+  const { pt } = useContext(ContextProvider);
+  const [patientData, setPatientData] = pt;
   const { popup, setPopup } = state;
+  const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pass, setPass] = useState("");
   const close = () => {
@@ -13,14 +19,22 @@ const PatientPopup = ({ state }) => {
   };
 
   const login = async () => {
-    const login = await instance.post("/patient/login", {
-      p_mid: id,
-      p_password: pass,
-    });
-    if (login.data.statuscode == 200) {
-      alert("right");
-    } else {
-      alert("wrong");
+    try {
+      const res = await instance.post("/patient/login", {
+        p_mid: id,
+        p_password: pass,
+      });
+      if (res.status == 200) {
+        toast.success("Login Successfull");
+        console.log(res.data);
+        setPatientData(res.data.data);
+        localStorage.setItem("ptoken", res.data.data.p_mid);
+        return navigate(`/app/patient/${res.data.data.p_mid}`, {
+          from: "patient",
+        });
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
     }
   };
 
