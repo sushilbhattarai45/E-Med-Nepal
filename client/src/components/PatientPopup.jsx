@@ -1,13 +1,16 @@
-import React from 'react'
-import Popup from './Popup';
-import styles from "../css/components/PatientPopup.module.css"
-import { Button, TextField } from '@mui/material';
+import React from "react";
+import Popup from "./Popup";
+import styles from "../css/components/PatientPopup.module.css";
+import { Button, TextField } from "@mui/material";
+import instance from "../config/axios.js";
 
-const PatientPopup = ({state}) => {
-    const {popup,setPopup} = state;
-    const close = () => {
-        setPopup({...popup,patient:!popup.patient})
-    }
+const PatientPopup = ({ state }) => {
+  const { popup, setPopup } = state;
+
+  const close = () => {
+    setPopup({ ...popup, patient: !popup.patient });
+  };
+
   return (
     <>
       <Popup
@@ -38,6 +41,6 @@ const PatientPopup = ({state}) => {
       </Popup>
     </>
   );
-}
+};
 
-export default PatientPopup
+export default PatientPopup;
