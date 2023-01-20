@@ -12,7 +12,7 @@ const AddoctorPopup = ({ state }) => {
   const { popup, setPopup } = state;
   const [pic, setPic] = React.useState("");
   const { hp } = useContext(ContextProvider);
-
+const [hospitalData, setHospitalData] = hp;
   const [imgUrl, setImgUrl] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState({
@@ -20,7 +20,7 @@ const AddoctorPopup = ({ state }) => {
     d_address: "",
     d_contact: "",
     d_id: Date.now(),
-    d_hid: "12345",
+    d_hid: hospitalData?.hm_hid,
     d_dob: "",
     d_profile: "",
     d_gender: "",

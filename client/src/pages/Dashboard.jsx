@@ -12,12 +12,15 @@ import {
 import { MdDelete } from "react-icons/md";
 import AddoctorPopup from "../components/AddoctorPopup";
 import instance from "../config/axios.js";
+import { ContextProvider } from "../config/Context";
 
 const Dashboard = () => {
+  const {hp} = React.useContext(ContextProvider);
+  const [hospitalData, setHospitalData] = hp;
   React.useEffect(() => {
     const getDoctors = async () => {
       const data = await instance.post("/hospital/getalldoctors", {
-        d_hid: "12345",
+        d_hid: hospitalData?.hm_hid,
       });
 
       setDoctor(data.data.data);

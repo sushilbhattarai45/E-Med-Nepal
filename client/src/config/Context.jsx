@@ -1,5 +1,5 @@
 import React, { createContext, useEffect } from "react";
-import axios from "../config/axios.js"
+import axios from "../config/axios.js";
 export const ContextProvider = createContext();
 
 const Context = ({ children }) => {
@@ -8,15 +8,26 @@ const Context = ({ children }) => {
   const ptoken = localStorage.getItem("ptoken");
   useEffect(() => {
     getPatientData();
-  }, [ptoken])
-  
-  // const getHospitalData = async () => {
-  //   const data = await axios.get("/hospital/getonehospital",
-  // }
-  const getPatientData = async () => {
-    const data = await axios.post("/patient/getonepatient", {
-      p_mid: ptoken,
+    getHospitalData();
+  }, [ptoken]);
+  const getHospitalData = async () => {
+    const data = await axios.post("/hospital/getonehospital", {
+      hm_hid: localStorage.getItem("htoken"),
     });
+    setHospitalData(data.data.data[0]);
+  };
+  const getPatientData = async () => {
+    const data = await axios.post(
+      "/patient/getonepatient",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        p_mid: ptoken,
+      }
+    );
     setPatientData(data.data.data[0]);
   };
   return (
