@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../css/pages/Report.module.css";
 import { BiArrowBack } from "react-icons/bi";
 import PrescriptionDisplay from "../components/PrescriptionDisplay";
-
+import { NavLink } from "react-router-dom";
 const symptoms = [1, 2, 3];
 const images = [1, 2, 3, 4, 5, 6, 7];
 import instance from "../config/axios.js";
