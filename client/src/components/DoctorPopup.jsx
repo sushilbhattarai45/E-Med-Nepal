@@ -18,6 +18,7 @@ const DoctorPopup = ({ state }) => {
     setPopup({ ...popup, doctor: !popup.doctor });
   };
   const login = async () => {
+    console.log(id, pass);
     const res = await instance.post("/hospital/login", {
       hm_hid: id,
       hm_password: pass,
