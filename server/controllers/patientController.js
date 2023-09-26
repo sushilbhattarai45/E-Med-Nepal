@@ -57,6 +57,7 @@ export const getOne = async (req, res) => {
 };
 export const login = async (req, res) => {
   const { p_mid, p_password } = req.body;
+
   try {
     const exists = await patientSchema.findOne({
       p_mid: p_mid,

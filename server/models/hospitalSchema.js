@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const hospital = new mongoose.Schema({
   hm_hid: {
     type: String,

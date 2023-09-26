@@ -19,7 +19,12 @@ App.listen(PORT, (req, res) => {
   console.log("listening on port " + PORT);
 });
 App.use(Express.json());
+
 App.use("/v1/api/patient", patientRoutes);
 App.use("/v1/api/doctor", doctorRoutes);
 App.use("/v1/api/report", reportRoutes);
 App.use("/v1/api/hospital", hospitalRoutes);
+// App.use(Express.static("../client/dist"));
+// App.get("*", (req, res) => {
+//   res.sendFile("/root/unifiedhealthsystem/client/dist/index.html"); // absolute path configured for server
+// });

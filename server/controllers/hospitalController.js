@@ -35,9 +35,10 @@ export const postHospital = async (req, res) => {
     return res.status(700).json({ error: " Server side error" });
   }
 };
-export const login = async (req, res) => {
+export const loginH = async (req, res) => {
   const { hm_hid, hm_password } = req.body;
   try {
+    console.log("hello");
     const exists = await hospitalSchema.findOne({
       hm_hid: hm_hid,
       hm_password: hm_password,
